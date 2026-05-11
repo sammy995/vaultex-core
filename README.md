@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <a href="https://vaultex.ai">Hosted version</a> ·
+  <a href="https://vaultex.space">Hosted version</a> ·
   <a href="#quick-start">Quick Start</a> ·
   <a href="#how-it-works">How it Works</a> ·
   <a href="#api-reference">API</a> ·
@@ -79,7 +79,7 @@ That's Vaultex Core.
 ### Option A — Docker (recommended, no Python setup required)
 
 ```bash
-git clone https://github.com/shubham92895/vaultex-core.git
+git clone https://github.com/sammy995/vaultex-core.git
 cd vaultex-core
 docker compose up
 ```
@@ -90,7 +90,7 @@ The first startup downloads spaCy `en_core_web_lg` (~800 MB) — subsequent star
 ### Option B — Local Python
 
 ```bash
-git clone https://github.com/shubham92895/vaultex-core.git
+git clone https://github.com/sammy995/vaultex-core.git
 cd vaultex-core
 
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
@@ -110,7 +110,7 @@ uvicorn gateway.main:app --reload
 curl -s -X POST http://localhost:8000/v1/tokenize \
   -H "Content-Type: application/json" \
   -d '{
-    "text": "Analyse risk for Jane Smith (SSN: 123-45-6789, email: jane@acme.com). Account ACC-00198234 has balance $42,500, credit score 742."
+    "text": "Analyze risk for Jane Smith (SSN: 123-45-6789, email: jane@acme.com). Account ACC-00198234 has balance $42,500, credit score 742."
   }' | python -m json.tool
 ```
 
@@ -119,8 +119,8 @@ curl -s -X POST http://localhost:8000/v1/tokenize \
 ```json
 {
   "session_id": "a3f1b2c4-...",
-  "original": "Analyse risk for Jane Smith (SSN: 123-45-6789, email: jane@acme.com). Account ACC-00198234 has balance $42,500, credit score 742.",
-  "tokenized": "Analyse risk for {{PERSON_1}} (SSN: {{SSN_1}}, email: {{EMAIL_1}}). Account {{ACCT_1}} has balance $42,500, credit score 742.",
+  "original": "Analyze risk for Jane Smith (SSN: 123-45-6789, email: jane@acme.com). Account ACC-00198234 has balance $42,500, credit score 742.",
+  "tokenized": "Analyze risk for {{PERSON_1}} (SSN: {{SSN_1}}, email: {{EMAIL_1}}). Account {{ACCT_1}} has balance $42,500, credit score 742.",
   "entities": [
     { "entity_type": "PERSON",         "token": "{{PERSON_1}}",  "original": "Jane Smith"    },
     { "entity_type": "SSN",            "token": "{{SSN_1}}",     "original": "123-45-6789"   },
@@ -153,7 +153,7 @@ curl -s -X POST http://localhost:8000/v1/chat \
     "messages": [
       {
         "role": "user",
-        "content": "Analyse risk for Jane Smith (SSN: 123-45-6789). Account ACC-00198234, credit score 742, 30 days past due. Loan LOAN-2024-0041, $85,000 mortgage at 6.25%."
+        "content": "Analyze risk for Jane Smith (SSN: 123-45-6789). Account ACC-00198234, credit score 742, 30 days past due. Loan LOAN-2024-0041, $85,000 mortgage at 6.25%."
       }
     ]
   }' | python -m json.tool
@@ -162,7 +162,7 @@ curl -s -X POST http://localhost:8000/v1/chat \
 What OpenAI's API actually receives:
 
 ```
-Analyse risk for {{PERSON_1}} (SSN: {{SSN_1}}). Account {{ACCT_1}}, credit score 742,
+Analyze risk for {{PERSON_1}} (SSN: {{SSN_1}}). Account {{ACCT_1}}, credit score 742,
 30 days past due. Loan {{LOAN_1}}, $85,000 mortgage at 6.25%.
 ```
 
@@ -336,7 +336,7 @@ This is a banking use-case. If you mask `$42,500`, the LLM can't compute average
 ## What's in the enterprise version?
 
 The core tokenization engine is MIT open-source and always will be.  
-[Vaultex hosted](https://vaultex.ai) adds:
+[Vaultex hosted](https://vaultex.space) adds:
 
 | Feature | Core (this repo) | Professional | Enterprise |
 |---|---|---|---|
@@ -350,7 +350,7 @@ The core tokenization engine is MIT open-source and always will be.
 | GLBA evidence pack | — | — | ✓ |
 | Support | GitHub Issues | Priority email | Dedicated Slack + SLA |
 
-→ [Join the waitlist](https://vaultex.ai/#waitlist)
+→ [Join the waitlist](https://vaultex.space/#waitlist)
 
 ---
 
@@ -360,6 +360,6 @@ Issues and PRs welcome. Please run `pytest tests/ -v` before opening a PR.
 
 ---
 
-## Licence
+## License
 
 MIT — see [LICENSE](LICENSE).
