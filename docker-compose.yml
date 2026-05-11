@@ -1,0 +1,9 @@
+services:
+  gateway:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Optional: mount a local .env file for OPENAI_API_KEY etc.
+    # env_file: .env
