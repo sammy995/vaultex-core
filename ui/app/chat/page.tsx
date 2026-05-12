@@ -8,7 +8,7 @@ import { sendChat, type ChatResponse, type ChatMeta } from "@/lib/api";
 import TokenizationPanel from "@/components/TokenizationPanel";
 import ActivityLog from "@/components/ActivityLog";
 import ChatInterface from "@/components/ChatInterface";
-import ProductGuide from "@/components/ProductGuide";
+import HowItWorks from "@/components/HowItWorks";
 import SettingsPanel from "@/components/SettingsPanel";
 import CsvUpload, { type CsvData, csvToSystemPrompt } from "@/components/CsvUpload";
 
@@ -48,6 +48,7 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
 
   useEffect(() => {
     const sid = getSessionId();
@@ -225,6 +226,22 @@ export default function ChatPage() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <button
+            className="btn-ghost"
+            onClick={() => router.push("/tokenize")}
+            style={{ padding: "6px 12px", fontSize: "0.82rem", display: "flex", alignItems: "center", gap: "6px", color: "#00e87a", borderColor: "rgba(0,232,122,0.25)" }}
+            title="Standalone PII tokenizer — no LLM needed"
+          >
+            PII Tokenizer
+          </button>
+          <button
+            className="btn-ghost"
+            onClick={() => setGuideOpen(true)}
+            style={{ padding: "6px 12px", fontSize: "0.82rem", display: "flex", alignItems: "center", gap: "6px" }}
+            title="How it works"
+          >
+            ? Guide
+          </button>
           <button
             className="btn-ghost"
             onClick={() => setSettingsOpen(true)}
@@ -405,7 +422,7 @@ export default function ChatPage() {
           <ActivityLog logs={logs} />
         </div>
       </div>
-      <ProductGuide />
+      <HowItWorks open={guideOpen} onClose={() => setGuideOpen(false)} />
       <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
   );

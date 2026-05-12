@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { configureSession, listOllamaModels, healthCheck, OllamaModel } from "@/lib/api";
 import { setSessionId, initSession } from "@/lib/session";
-import ProductGuide from "@/components/ProductGuide";
+import HowItWorks from "@/components/HowItWorks";
 
 type Provider = "anthropic" | "openai" | "ollama";
 
@@ -81,6 +81,7 @@ export default function SetupPage() {
 
   const selectedProvider = PROVIDERS.find((p) => p.id === provider);
   const [gatewayNotLocal, setGatewayNotLocal] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
 
   // Detect if the user is visiting from a non-localhost origin
   useEffect(() => {
@@ -171,6 +172,24 @@ export default function SetupPage() {
       />
 
       <div style={{ width: "100%", maxWidth: "640px", position: "relative" }}>
+        {/* Top utility bar */}
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px", marginBottom: "16px" }}>
+          <button
+            onClick={() => router.push("/tokenize")}
+            className="btn-ghost"
+            style={{ padding: "5px 12px", fontSize: "0.78rem", display: "flex", alignItems: "center", gap: "5px", color: "#00e87a", borderColor: "rgba(0,232,122,0.25)" }}
+          >
+            PII Tokenizer
+          </button>
+          <button
+            onClick={() => setGuideOpen(true)}
+            className="btn-ghost"
+            style={{ padding: "5px 12px", fontSize: "0.78rem", display: "flex", alignItems: "center", gap: "5px" }}
+          >
+            ? How it works
+          </button>
+        </div>
+
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "40px" }}>
           <div
@@ -861,7 +880,7 @@ export default function SetupPage() {
           to { transform: rotate(360deg); }
         }
       `}</style>
-      <ProductGuide />
+      <HowItWorks open={guideOpen} onClose={() => setGuideOpen(false)} />
     </div>
   );
 }
