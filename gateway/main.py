@@ -7,7 +7,7 @@ import jwt as pyjwt
 import structlog
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -72,6 +72,31 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Chrome Private Network Access: HTTPS pages fetching http://localhost require
+# the server to respond to OPTIONS preflights with this header.
+@app.middleware("http")
+async def private_network_access(request: Request, call_next):
+    if (
+        request.method == "OPTIONS"
+        and "access-control-request-private-network" in request.headers
+    ):
+        origin = request.headers.get("origin", "*")
+        return Response(
+            status_code=204,
+            headers={
+                "Access-Control-Allow-Origin": origin,
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Session-ID",
+                "Access-Control-Allow-Private-Network": "true",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Max-Age": "86400",
+                "Vary": "Origin",
+            },
+        )
+    response = await call_next(request)
+    return response
 
 
 # ---------------------------------------------------------------------------

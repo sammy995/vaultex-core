@@ -10,7 +10,7 @@ class Settings(BaseSettings):
         "http://localhost:3000,"
         "http://localhost:3001,"
         "https://vaultex-iota.vercel.app,"
-        "https://vaultex.space",
+        "https://vaultex.space,"
         "https://vaultex.app"
     )
 
