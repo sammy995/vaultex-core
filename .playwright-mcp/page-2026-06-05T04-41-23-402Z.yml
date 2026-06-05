@@ -1,0 +1,56 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - button "Back" [ref=e4] [cursor=pointer]:
+        - img [ref=e5]
+        - text: Back
+      - generic [ref=e7]:
+        - img [ref=e9]
+        - generic [ref=e11]: PII Tokenizer
+        - generic [ref=e12]: STARTER · FREE
+      - button "Reset Session" [ref=e14] [cursor=pointer]:
+        - img [ref=e15]
+        - text: Reset Session
+    - main [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - heading "Detect & tokenize PII — no AI needed" [level=1] [ref=e23]
+          - button "How it works" [ref=e24] [cursor=pointer]:
+            - img [ref=e25]
+        - paragraph [ref=e27]: "Paste any text. The tokenizer identifies PII using regex patterns and named-entity heuristics, then replaces each value with a deterministic {{TOKEN}}. Same PII → same token, always. Runs 100% in your browser."
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: Input
+            - generic [ref=e32]: 292 chars
+          - textbox "Paste text containing PII…" [ref=e33]: "Analyze risk profile for Jane Smith (SSN: 123-45-6789, email: jane.smith@acme.com, phone: 415-555-0192). Account ACC-00198234 has balance $42,500, credit score 742. Loan LOAN-2024-0041: $85,000 mortgage at 6.25%, 30 days past due. Date of birth: 01/15/1985. Card on file: 4111-1111-1111-1111."
+          - generic [ref=e34]:
+            - generic [ref=e35]: Nothing sent to any server · runs in your browser
+            - button "Tokenize" [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+              - text: Tokenize
+        - generic [ref=e39]:
+          - generic [ref=e41]: Tokenized Output
+          - generic [ref=e42]: Tokenized text will appear here…
+          - generic [ref=e43]: Click Tokenize to see the result
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: Ready for production-grade LLM privacy?
+          - generic [ref=e47]: The full gateway connects to OpenAI, Anthropic, or a local Ollama model — PII is tokenized before every LLM call and de-tokenized per your role on return. Audit-logged. Deploys in under 30 min.
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: ✓
+              - text: Role-aware de-tokenization
+            - generic [ref=e51]:
+              - generic [ref=e52]: ✓
+              - text: Full audit trail
+            - generic [ref=e53]:
+              - generic [ref=e54]: ✓
+              - text: Docker · 30 min setup
+        - generic [ref=e55]:
+          - link "Deploy the Gateway →" [ref=e56] [cursor=pointer]:
+            - /url: /setup
+          - generic [ref=e57]: Free & open-source
+  - button "Open Next.js Dev Tools" [ref=e63] [cursor=pointer]:
+    - img [ref=e64]
+  - alert [ref=e67]

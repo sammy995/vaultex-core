@@ -1,0 +1,130 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Vaultex AI Trust Infrastructure" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: Vaultex
+        - generic [ref=e7]: AI Trust Infrastructure
+      - generic [ref=e8]:
+        - link "Platform" [ref=e9] [cursor=pointer]:
+          - /url: /#platform
+        - link "Security" [ref=e10] [cursor=pointer]:
+          - /url: /security
+        - link "Compliance" [ref=e11] [cursor=pointer]:
+          - /url: /compliance
+        - link "Pricing" [ref=e12] [cursor=pointer]:
+          - /url: /pricing
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e14]:
+        - link "GitHub" [ref=e15] [cursor=pointer]:
+          - /url: https://github.com/sammy995/vaultex
+          - img [ref=e16]
+          - text: GitHub
+        - link "Try the demo" [ref=e18] [cursor=pointer]:
+          - /url: /tokenize
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: Security
+        - generic [ref=e23]: Architecture & posture
+      - generic [ref=e24]:
+        - heading "Built to be trusted by people who trust nothing." [level=1] [ref=e25]
+        - paragraph [ref=e26]: Banks don't buy diagrams — they buy controls, isolation, auditability, and evidence. Here's how Vaultex is constructed to earn a pilot.
+      - generic [ref=e27]:
+        - text: The trust boundary
+        - paragraph [ref=e28]: Raw data stays inside. The model provider lives outside. The line between them is enforced, not assumed.
+        - paragraph [ref=e29]: your network ─▶ classify ─▶ tokenize ─▶ [ boundary ] ─▶ LLM ─▶ screen ─▶ detokenize (by role) ─▶ audit
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - img [ref=e32]
+          - heading "PII never leaves un-tokenized" [level=3] [ref=e35]
+          - paragraph [ref=e36]: Detected identifiers are tokenized at the gateway before any prompt is forwarded. With local models, nothing leaves your network at all. The token vault is encrypted at rest and never transmitted.
+        - generic [ref=e37]:
+          - img [ref=e38]
+          - heading "Tamper-evident audit chain" [level=3] [ref=e43]
+          - paragraph [ref=e44]: Every governance decision is hash-chained into an append-only ledger. Each entry links to the previous one; edits or deletions break the chain and are blocked at the database (WORM).
+        - generic [ref=e45]:
+          - img [ref=e46]
+          - heading "Role-based disclosure" [level=3] [ref=e49]
+          - paragraph [ref=e50]: Detokenization is enforced per role at the token level — a junior analyst and a VP never see the same response. Access decisions are themselves audited.
+        - generic [ref=e51]:
+          - img [ref=e52]
+          - heading "Zero-trust tenant isolation" [level=3] [ref=e57]
+          - paragraph [ref=e58]: Every record is tenant-scoped and every query is filtered; row-level security enforces it at the database as defense-in-depth.
+        - generic [ref=e59]:
+          - img [ref=e60]
+          - heading "Secrets & key management" [level=3] [ref=e63]
+          - paragraph [ref=e64]: Signing keys, provider credentials, and the token-encryption key live in a secrets provider, never in source. Rotation is key-id based with a grace window so it never invalidates in-flight sessions.
+        - generic [ref=e65]:
+          - img [ref=e66]
+          - heading "Deploy on your terms" [level=3] [ref=e77]
+          - paragraph [ref=e78]: Self-host with Docker, run in a private VPC, or keep everything on-prem with local models. No data egress required for the core privacy guarantee.
+      - generic [ref=e79]:
+        - img [ref=e80]
+        - paragraph [ref=e83]:
+          - text: Found a vulnerability? Read our
+          - link "responsible-disclosure policy" [ref=e84] [cursor=pointer]:
+            - /url: https://github.com/sammy995/vaultex/blob/main/SECURITY.md
+          - text: or email
+          - link "security@vaultex.space" [ref=e85] [cursor=pointer]:
+            - /url: mailto:security@vaultex.space
+          - text: .
+      - generic [ref=e86]:
+        - link "Compliance & frameworks" [ref=e87] [cursor=pointer]:
+          - /url: /compliance
+        - link "See plans" [ref=e88] [cursor=pointer]:
+          - /url: /pricing
+  - contentinfo [ref=e89]:
+    - generic [ref=e90]:
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - text: Vaultex
+          - paragraph [ref=e93]: The trust layer between regulated enterprises and the LLMs they use. Input governance, runtime safety, and an immutable governance engine.
+          - paragraph [ref=e94]: Open-source · Apache-2.0
+        - generic [ref=e95]:
+          - paragraph [ref=e96]: Platform
+          - generic [ref=e97]:
+            - link "Input governance" [ref=e98] [cursor=pointer]:
+              - /url: /#platform
+            - link "Runtime & FIN-SAFE" [ref=e99] [cursor=pointer]:
+              - /url: /security
+            - link "Governance engine" [ref=e100] [cursor=pointer]:
+              - /url: /#governance
+            - link "Pricing" [ref=e101] [cursor=pointer]:
+              - /url: /pricing
+        - generic [ref=e102]:
+          - paragraph [ref=e103]: Open source
+          - generic [ref=e104]:
+            - link "GitHub — vaultex" [ref=e105] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex
+            - link "Contracts & API" [ref=e106] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/tree/main/contracts
+            - link "Report an issue" [ref=e107] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/issues
+        - generic [ref=e108]:
+          - paragraph [ref=e109]: Company
+          - generic [ref=e110]:
+            - link "About" [ref=e111] [cursor=pointer]:
+              - /url: /about
+            - link "Trust Center" [ref=e112] [cursor=pointer]:
+              - /url: /trust
+            - link "Security" [ref=e113] [cursor=pointer]:
+              - /url: /security
+            - link "Compliance" [ref=e114] [cursor=pointer]:
+              - /url: /compliance
+            - link "Contact" [ref=e115] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=e116]:
+          - paragraph [ref=e117]: Legal
+          - generic [ref=e118]:
+            - link "Privacy" [ref=e119] [cursor=pointer]:
+              - /url: /privacy
+            - link "Terms" [ref=e120] [cursor=pointer]:
+              - /url: /terms
+      - separator [ref=e121]
+      - generic [ref=e122]:
+        - generic [ref=e123]: © 2026 Vaultex — AI Trust Infrastructure
+        - generic [ref=e124]: GLBA · GDPR · SOC 2 · NIST AI RMF aligned
+  - button "Open Next.js Dev Tools" [ref=e130] [cursor=pointer]:
+    - img [ref=e131]

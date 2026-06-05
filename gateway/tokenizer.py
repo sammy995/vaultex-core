@@ -1,10 +1,10 @@
+from __future__ import annotations
+
 import hashlib
 from dataclasses import dataclass, field
 from typing import List, Tuple, Dict
 
 import structlog
-from presidio_analyzer import AnalyzerEngine, PatternRecognizer, Pattern
-from presidio_analyzer.nlp_engine import NlpEngineProvider
 
 log = structlog.get_logger()
 
@@ -37,6 +37,12 @@ ALL_ENTITIES = list(ENTITY_SHORT.keys())
 
 
 def _build_analyzer() -> AnalyzerEngine:
+    # Heavy NER stack imported lazily: keeps the module importable without
+    # Presidio/spaCy present, and avoids the multi-second model load at process
+    # startup (the analyzer is built on first tokenize call only).
+    from presidio_analyzer import AnalyzerEngine, Pattern, PatternRecognizer
+    from presidio_analyzer.nlp_engine import NlpEngineProvider
+
     ssn_recognizer = PatternRecognizer(
         supported_entity="SSN",
         patterns=[

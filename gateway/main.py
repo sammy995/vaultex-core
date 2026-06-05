@@ -14,7 +14,7 @@ from slowapi.util import get_remote_address
 
 from gateway.audit import AuditLogger, EventType
 from gateway.auth import issue_token, validate_token
-from gateway.config import settings
+from gateway.config import assert_secure_secret, settings
 from gateway.database import get_db, init_db
 from gateway.detokenizer import run_detokenize
 from gateway.llm_router import list_ollama_models, route_to_llm
@@ -28,8 +28,9 @@ from gateway.models import (
     TokenResponse,
     UserResponse,
 )
-from gateway.rbac import get_role_permissions
+from gateway.rbac import PRIVILEGED_ROLES, get_role_permissions
 from gateway.redis_store import SessionStore
+from gateway.revocation import is_revoked
 from gateway.tokenizer import run_tokenize
 from gateway.users import authenticate_user, create_user, get_user_by_email, get_user_by_username
 
@@ -53,6 +54,7 @@ limiter = Limiter(key_func=get_remote_address)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global store, audit_log
+    assert_secure_secret()  # DB4: fail closed in prod on a default/weak JWT secret
     init_db()  # create users table if not exists
     store = SessionStore(settings.redis_url)
     audit_log = AuditLogger(store.redis)
@@ -109,10 +111,13 @@ def _correlation_id(request: Request) -> str:
     return request.headers.get("X-Request-ID") or str(uuid.uuid4())
 
 
-async def _require_admin(
+async def _require_auth(
     authorization: Optional[str] = Header(None),
 ) -> dict:
-    """FastAPI dependency that enforces admin-role JWT."""
+    """FastAPI dependency: validate a Bearer JWT and reject revoked tokens.
+
+    Returns the decoded claims. Role checks are layered on top by callers.
+    """
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(401, "Authentication required")
     try:
@@ -121,6 +126,15 @@ async def _require_admin(
         raise HTTPException(401, "Token expired")
     except Exception:
         raise HTTPException(401, "Invalid token")
+    if await is_revoked(store.redis, payload.get("jti")):
+        raise HTTPException(401, "Token has been revoked")
+    return payload
+
+
+async def _require_admin(
+    payload: dict = Depends(_require_auth),
+) -> dict:
+    """FastAPI dependency that enforces admin-role JWT."""
     if payload.get("role") != "admin":
         raise HTTPException(403, "Admin role required")
     return payload
@@ -147,9 +161,15 @@ async def health():
 
 
 @app.post("/api/session/configure", response_model=SessionConfigResponse)
-async def configure_session(body: SessionConfigRequest, request: Request):
+async def configure_session(
+    body: SessionConfigRequest,
+    request: Request,
+    auth: dict = Depends(_require_auth),
+):
     correlation_id = _correlation_id(request)
     session_id = str(uuid.uuid4())
+    owner_sub = auth.get("sub", "")
+    owner_tenant = auth.get("tenant", "default")
     await store.set_provider_config(
         session_id,
         {
@@ -159,10 +179,14 @@ async def configure_session(body: SessionConfigRequest, request: Request):
             "ollama_url": body.ollama_url or "http://localhost:11434",
         },
     )
+    # DB3: bind the session to its creator so no other identity can drive it.
+    await store.set_session_owner(session_id, owner_sub, owner_tenant)
     await audit_log.log_event(
         EventType.SESSION_CREATE,
         correlation_id=correlation_id,
         session_id=session_id,
+        role=auth.get("role"),
+        tenant_id=owner_tenant,
         details={"provider": body.provider, "model": body.model},
     )
     log.info("session_created", session_id=session_id, provider=body.provider)
@@ -186,11 +210,37 @@ async def get_models(provider: str, ollama_url: Optional[str] = "http://localhos
 async def get_auth_token(body: TokenRequest, request: Request):
     """Issue a server-signed JWT for the requested role.
 
-    In the enterprise version this endpoint would sit behind SSO / OIDC.
-    For the current stage it accepts any valid role name directly, which
-    is suitable for internal tools and design-partner pilots.
+    DB1: this endpoint is credential-free and therefore DISABLED by default. The
+    supported path to a token is POST /api/users/login (bcrypt). An operator may
+    opt into this legacy endpoint via ALLOW_INSECURE_TOKEN_ENDPOINT for a dev or
+    design-partner pilot; even then it refuses privileged roles (admin, vp_risk)
+    so a self-asserted role can never reach regulated PII or the audit log.
+    ⛔ Halt-point: remove this endpoint entirely once SSO/OIDC issuance lands.
     """
     correlation_id = _correlation_id(request)
+    if not settings.allow_insecure_token_endpoint:
+        await audit_log.log_event(
+            EventType.AUTH_FAILURE,
+            correlation_id=correlation_id,
+            role=body.role,
+            details={"reason": "direct_token_endpoint_disabled"},
+        )
+        raise HTTPException(
+            403,
+            "Direct token issuance is disabled. Authenticate via POST /api/users/login.",
+        )
+    if body.role in PRIVILEGED_ROLES:
+        await audit_log.log_event(
+            EventType.AUTH_FAILURE,
+            correlation_id=correlation_id,
+            role=body.role,
+            details={"reason": "privileged_role_via_direct_endpoint"},
+        )
+        raise HTTPException(
+            403,
+            f"Role '{body.role}' cannot be issued via the direct token endpoint; "
+            "it requires an authenticated login.",
+        )
     try:
         token = issue_token(body.role, body.subject)
     except ValueError as exc:
@@ -286,13 +336,15 @@ async def get_audit_logs(
 ):
     """Return the audit log for the given UTC date (admin role required)."""
     correlation_id = _correlation_id(request)
+    tenant = admin.get("tenant", "default")
     await audit_log.log_event(
         EventType.ADMIN_ACCESS,
         correlation_id=correlation_id,
         role=admin.get("role"),
+        tenant_id=tenant,
         details={"action": "get_audit_logs", "date": date, "limit": limit},
     )
-    logs = await audit_log.get_logs(date=date, limit=min(limit, 500))
+    logs = await audit_log.get_logs(date=date, limit=min(limit, 500), tenant_id=tenant)
     return {"logs": logs, "count": len(logs), "date": date or "today"}
 
 
@@ -323,6 +375,17 @@ async def chat_completions(
         )
         raise HTTPException(401, "Invalid token")
 
+    tenant = payload.get("tenant", "default")
+    if await is_revoked(store.redis, payload.get("jti")):
+        await audit_log.log_event(
+            EventType.AUTH_FAILURE,
+            correlation_id,
+            x_session_id,
+            tenant_id=tenant,
+            details={"reason": "revoked"},
+        )
+        raise HTTPException(401, "Token has been revoked")
+
     allowed_entities = get_role_permissions(role)
 
     # 2. Load provider config
@@ -330,6 +393,27 @@ async def chat_completions(
     if not config:
         raise HTTPException(
             404, "Session not found or expired. Please reconfigure the gateway."
+        )
+
+    # DB3: the X-Session-ID must belong to the authenticated caller. Without this
+    # any valid token could drive another user's/tenant's session and detokenize
+    # their PII (IDOR). Fail closed if the owner record is missing or mismatched.
+    owner = await store.get_session_owner(x_session_id)
+    if (
+        not owner
+        or owner.get("sub") != payload.get("sub")
+        or owner.get("tenant", "default") != tenant
+    ):
+        await audit_log.log_event(
+            EventType.AUTH_FAILURE,
+            correlation_id,
+            x_session_id,
+            role=role,
+            tenant_id=tenant,
+            details={"reason": "session_ownership_mismatch"},
+        )
+        raise HTTPException(
+            403, "This session does not belong to the authenticated caller."
         )
 
     # 3. Tokenize all messages — FAIL SAFE: any error blocks the request
@@ -356,6 +440,7 @@ async def chat_completions(
             correlation_id,
             session_id=x_session_id,
             role=role,
+            tenant_id=tenant,
             details={
                 "entity_count": len(all_entities),
                 "entity_types": list({e["entity_type"] for e in all_entities}),
@@ -389,6 +474,7 @@ async def chat_completions(
         correlation_id,
         session_id=x_session_id,
         role=role,
+        tenant_id=tenant,
         details={
             "provider": config["provider"],
             "model": config["model"],

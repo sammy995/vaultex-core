@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/test_governance_client.py -q)",
+      "Bash(python -c \"import httpx, sys; print\\('httpx', httpx.__version__, sys.executable\\)\")",
+      "Bash(python -c \"import importlib; [print\\(m, 'OK' if importlib.util.find_spec\\(m\\) else 'MISSING'\\) for m in ['structlog','pydantic_settings','pydantic','httpx','pytest']]\")",
+      "Bash(python -m pip install --quiet structlog)",
+      "Bash(uv pip *)",
+      "Bash(python -c \"import json; json.load\\(open\\(r'e:/AI learning/agentguard/contracts/schemas/governance.schema.json'\\)\\); print\\('governance.schema.json: valid JSON'\\)\")",
+      "Bash(python -c ' *)"
+    ],
+    "additionalDirectories": [
+      "e:\\AI learning\\vaultex\\packages\\classifier\\vaultex"
+    ]
+  }
+}

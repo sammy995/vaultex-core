@@ -1,0 +1,337 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Vaultex AI Trust Infrastructure" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: Vaultex
+        - generic [ref=e7]: AI Trust Infrastructure
+      - generic [ref=e8]:
+        - link "Platform" [ref=e9] [cursor=pointer]:
+          - /url: /#platform
+        - link "Security" [ref=e10] [cursor=pointer]:
+          - /url: /security
+        - link "Compliance" [ref=e11] [cursor=pointer]:
+          - /url: /compliance
+        - link "Pricing" [ref=e12] [cursor=pointer]:
+          - /url: /pricing
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e14]:
+        - link "GitHub" [ref=e15] [cursor=pointer]:
+          - /url: https://github.com/sammy995/vaultex
+          - img [ref=e16]
+          - text: GitHub
+        - link "Try the demo" [ref=e18] [cursor=pointer]:
+          - /url: /tokenize
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: Pricing
+        - generic [ref=e23]: Open core · Apache-2.0
+      - generic [ref=e24]:
+        - heading "Open to start. Priced to trust." [level=1] [ref=e25]
+        - paragraph [ref=e26]:
+          - text: The interfaces, reference detectors, classifier, and SDKs are
+          - link "open source" [ref=e27] [cursor=pointer]:
+            - /url: https://github.com/sammy995/vaultex
+          - text: "and always will be. We earn on what regulated institutions actually need: tuned detection, managed governance, and compliance evidence."
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e31]: Open Source
+          - generic [ref=e32]:
+            - generic [ref=e33]: $0
+            - generic [ref=e34]: Apache-2.0
+          - paragraph [ref=e35]: Self-host the open wedge. Reference detectors, classifier, integrations, and SDKs — no lock-in, no egress.
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - img [ref=e38]
+              - generic [ref=e40]: finsafe-core + classifier + integrations
+            - generic [ref=e41]:
+              - img [ref=e42]
+              - generic [ref=e44]: Python & TypeScript SDKs
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - generic [ref=e48]: Governance Service contracts
+            - generic [ref=e49]:
+              - img [ref=e50]
+              - generic [ref=e52]: Self-host with Ollama (local) — zero egress
+            - generic [ref=e53]:
+              - img [ref=e54]
+              - generic [ref=e56]: Community support
+          - link "View on GitHub" [ref=e57] [cursor=pointer]:
+            - /url: https://github.com/sammy995/vaultex
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]: Professional
+            - generic [ref=e61]: POPULAR
+          - generic [ref=e62]:
+            - generic [ref=e63]: $299
+            - generic [ref=e64]: / month
+          - paragraph [ref=e65]: Hosted gateway with tuned detection, the semantic classifier, and the governance console.
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - img [ref=e68]
+              - generic [ref=e70]: Tuned detectors + semantic classifier
+            - generic [ref=e71]:
+              - img [ref=e72]
+              - generic [ref=e74]: Anthropic · OpenAI · Ollama routing (PII-stripped)
+            - generic [ref=e75]:
+              - img [ref=e76]
+              - generic [ref=e78]: Governance dashboard + policy versioning
+            - generic [ref=e79]:
+              - img [ref=e80]
+              - generic [ref=e82]: 90-day immutable audit retention
+            - generic [ref=e83]:
+              - img [ref=e84]
+              - generic [ref=e86]: Role-based detokenization controls
+            - generic [ref=e87]:
+              - img [ref=e88]
+              - generic [ref=e90]: Priority email support
+          - link "Start a trial" [ref=e91] [cursor=pointer]:
+            - /url: /setup
+        - generic [ref=e92]:
+          - generic [ref=e94]: Enterprise
+          - generic [ref=e95]:
+            - generic [ref=e96]: Custom
+            - generic [ref=e97]: BFSI
+          - paragraph [ref=e98]: For regulated institutions that need it on their own terms — on their own infrastructure.
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - img [ref=e101]
+              - generic [ref=e103]: On-prem / private VPC deployment
+            - generic [ref=e104]:
+              - img [ref=e105]
+              - generic [ref=e107]: SOC 2 Type II report + BFSI risk taxonomy
+            - generic [ref=e108]:
+              - img [ref=e109]
+              - generic [ref=e111]: SSO / SAML, custom RBAC, separation of duties
+            - generic [ref=e112]:
+              - img [ref=e113]
+              - generic [ref=e115]: Evidence packs + reviewer attestations
+            - generic [ref=e116]:
+              - img [ref=e117]
+              - generic [ref=e119]: Custom retention & data residency
+            - generic [ref=e120]:
+              - img [ref=e121]
+              - generic [ref=e123]: Dedicated support + 99.9% uptime SLA
+          - link "Contact sales" [ref=e124] [cursor=pointer]:
+            - /url: mailto:hello@vaultex.space?subject=Vaultex%20Enterprise
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - text: For regulated buyers · early access
+          - heading "Start with a scoped pilot — built to pass security review, not just a demo." [level=2] [ref=e128]
+        - generic [ref=e129]:
+          - paragraph [ref=e130]: "A fixed-scope, 2–4 week proof of concept on your infrastructure. Includes:"
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - img [ref=e133]
+              - generic [ref=e135]: Hands-on deployment in your environment
+            - generic [ref=e136]:
+              - img [ref=e137]
+              - generic [ref=e139]: Source review of the open-core components (SAST/SCA-friendly)
+            - generic [ref=e140]:
+              - img [ref=e141]
+              - generic [ref=e143]: Written answers to your security questionnaire + architecture brief
+            - generic [ref=e144]:
+              - img [ref=e145]
+              - generic [ref=e147]: PII-detection tuning on a sample of your real workflows
+          - link "Scope a pilot →" [ref=e148] [cursor=pointer]:
+            - /url: mailto:hello@vaultex.space?subject=Vaultex%20pilot
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - text: The open / commercial line
+          - heading "Open foundation. Commercial trust." [level=2] [ref=e151]
+          - paragraph [ref=e152]:
+            - text: Everything left of the line is free forever and runs on your own infrastructure. Everything right of it is what a regulated institution is
+            - emphasis [ref=e153]: accountable
+            - text: for — and, by design, cannot produce for itself.
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e158]: Free forever
+            - generic [ref=e159]: Commercial — we're accountable
+          - generic [ref=e160]:
+            - generic [ref=e161]: Capability
+            - generic [ref=e162]: Open Source
+            - generic [ref=e163]: Professional
+            - generic [ref=e164]: Enterprise
+          - generic [ref=e165]:
+            - generic [ref=e167]: Data in · input governance
+            - generic [ref=e171]:
+              - generic [ref=e172]: PII / PHI tokenization gateway (self-host)
+              - img "Included" [ref=e174]
+              - generic [ref=e177]: Managed
+              - generic [ref=e179]: Managed + VPC
+            - generic [ref=e180]:
+              - generic [ref=e181]: Reference detection — regex + Presidio NER
+              - img "Included" [ref=e183]
+              - img "Included" [ref=e186]
+              - img "Included" [ref=e189]
+            - generic [ref=e191]:
+              - generic [ref=e192]: Semantic / document-level sensitivity
+              - generic "Not included" [ref=e194]: –
+              - img "Included" [ref=e196]
+              - img "Included" [ref=e199]
+            - generic [ref=e201]:
+              - generic [ref=e202]: BFSI taxonomy — MNPI · lending · privilege
+              - generic "Not included" [ref=e204]: –
+              - generic "Not included" [ref=e206]: –
+              - img "Included" [ref=e208]
+          - generic [ref=e210]:
+            - generic [ref=e212]: Behaviour out · runtime safety (FIN-SAFE)
+            - generic [ref=e216]:
+              - generic [ref=e217]: Reference detectors — injection · leak · jailbreak
+              - img "Included" [ref=e219]
+              - img "Included" [ref=e222]
+              - img "Included" [ref=e225]
+            - generic [ref=e227]:
+              - generic [ref=e228]: Tuned / ML detection
+              - generic "Not included" [ref=e230]: –
+              - img "Included" [ref=e232]
+              - generic [ref=e235]: Tuned + custom
+            - generic [ref=e236]:
+              - generic [ref=e237]: Model-risk scoring & per-model risk tiers
+              - generic "Not included" [ref=e239]: –
+              - img "Included" [ref=e241]
+              - img "Included" [ref=e244]
+            - generic [ref=e246]:
+              - generic [ref=e247]: Contractable false-negative rates (SR 11-7)
+              - generic "Not included" [ref=e249]: –
+              - generic "Not included" [ref=e251]: –
+              - img "Included" [ref=e253]
+          - generic [ref=e255]:
+            - generic [ref=e257]: Governance & evidence
+            - generic [ref=e261]:
+              - generic [ref=e262]: Reference governance client + audit events
+              - img "Included" [ref=e264]
+              - img "Included" [ref=e267]
+              - img "Included" [ref=e270]
+            - generic [ref=e272]:
+              - generic [ref=e273]: Hash-chained WORM audit + policy versioning
+              - generic "Not included" [ref=e275]: –
+              - img "Included" [ref=e277]
+              - img "Included" [ref=e280]
+            - generic [ref=e282]:
+              - generic [ref=e283]: Dual-approval / separation of duties
+              - generic "Not included" [ref=e285]: –
+              - generic "Not included" [ref=e287]: –
+              - img "Included" [ref=e289]
+            - generic [ref=e291]:
+              - generic [ref=e292]: Regulator-ready evidence packs + control mapping
+              - generic "Not included" [ref=e294]: –
+              - img "Included" [ref=e296]
+              - generic [ref=e299]: ✓ + attestations
+            - generic [ref=e300]:
+              - generic [ref=e301]: Vendor-attested continuous compliance evidence
+              - generic "Not included" [ref=e303]: –
+              - generic "Not included" [ref=e305]: –
+              - img "Included" [ref=e307]
+          - generic [ref=e309]:
+            - generic [ref=e311]: Integrations & identity
+            - generic [ref=e315]:
+              - generic [ref=e316]: OpenTelemetry · Prometheus · Datadog · SIEM
+              - img "Included" [ref=e318]
+              - img "Included" [ref=e321]
+              - img "Included" [ref=e324]
+            - generic [ref=e326]:
+              - generic [ref=e327]: OIDC sign-in
+              - img "Included" [ref=e329]
+              - img "Included" [ref=e332]
+              - img "Included" [ref=e335]
+            - generic [ref=e337]:
+              - generic [ref=e338]: SSO / SAML + SCIM provisioning
+              - generic "Not included" [ref=e340]: –
+              - generic "Not included" [ref=e342]: –
+              - img "Included" [ref=e344]
+          - generic [ref=e346]:
+            - generic [ref=e348]: Platform, trust & accountability
+            - generic [ref=e352]:
+              - generic [ref=e353]: Deployment
+              - generic [ref=e355]: Self-host (Docker)
+              - generic [ref=e357]: Hosted / Docker
+              - generic [ref=e359]: Private VPC / on-prem
+            - generic [ref=e360]:
+              - generic [ref=e361]: SOC 2 Type II · ISO 42001 posture
+              - generic "Not included" [ref=e363]: –
+              - generic "Not included" [ref=e365]: –
+              - img "Included" [ref=e367]
+            - generic [ref=e369]:
+              - generic [ref=e370]: Data residency & retention
+              - generic [ref=e372]: Self-managed
+              - generic [ref=e374]: 90 days
+              - generic [ref=e376]: Custom
+            - generic [ref=e377]:
+              - generic [ref=e378]: SLA · liability · support
+              - generic [ref=e380]: Community
+              - generic [ref=e382]: Priority email
+              - generic [ref=e384]: Dedicated + SLA
+        - heading "Why the line is there" [level=3] [ref=e385]
+        - paragraph [ref=e386]: The open core is genuinely useful on its own. But three things sit permanently on the paid side — not as withheld features, but because they can only exist with a vendor behind them.
+        - generic [ref=e387]:
+          - generic [ref=e388]:
+            - generic [ref=e389]: "01"
+            - heading "Attestation needs a third party" [level=4] [ref=e390]
+            - paragraph [ref=e391]: A regulator accepts evidence a vendor attests to — not logs you generated about yourself. You can self-host the audit trail forever; you cannot self-issue the attestation that makes it count in an exam.
+          - generic [ref=e392]:
+            - generic [ref=e393]: "02"
+            - heading "Accuracy you can put in a contract" [level=4] [ref=e394]
+            - paragraph [ref=e395]: The open detectors are honest baselines. Tuned detection with measured false-negative rates — and a vendor liable for them — is what survives model-risk review under SR 11-7. Accountability isn't a feature you can fork.
+          - generic [ref=e396]:
+            - generic [ref=e397]: "03"
+            - heading "Compliance is a service, not a build" [level=4] [ref=e398]
+            - paragraph [ref=e399]: SOC 2, data residency, evidence retention, SLA and support are continuing obligations someone carries on your behalf — not code you run once. That ongoing carry is the line, and it's what the price buys.
+      - generic [ref=e400]:
+        - paragraph [ref=e401]: Questions about Enterprise terms or a compliance review?
+        - link "Talk to sales →" [ref=e402] [cursor=pointer]:
+          - /url: mailto:hello@vaultex.space
+  - contentinfo [ref=e403]:
+    - generic [ref=e404]:
+      - generic [ref=e405]:
+        - generic [ref=e406]:
+          - text: Vaultex
+          - paragraph [ref=e407]: The trust layer between regulated enterprises and the LLMs they use. Input governance, runtime safety, and an immutable governance engine.
+          - paragraph [ref=e408]: Open-source · Apache-2.0
+        - generic [ref=e409]:
+          - paragraph [ref=e410]: Platform
+          - generic [ref=e411]:
+            - link "Input governance" [ref=e412] [cursor=pointer]:
+              - /url: /#platform
+            - link "Runtime & FIN-SAFE" [ref=e413] [cursor=pointer]:
+              - /url: /security
+            - link "Governance engine" [ref=e414] [cursor=pointer]:
+              - /url: /#governance
+            - link "Pricing" [ref=e415] [cursor=pointer]:
+              - /url: /pricing
+        - generic [ref=e416]:
+          - paragraph [ref=e417]: Open source
+          - generic [ref=e418]:
+            - link "GitHub — vaultex" [ref=e419] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex
+            - link "Contracts & API" [ref=e420] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/tree/main/contracts
+            - link "Report an issue" [ref=e421] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/issues
+        - generic [ref=e422]:
+          - paragraph [ref=e423]: Company
+          - generic [ref=e424]:
+            - link "About" [ref=e425] [cursor=pointer]:
+              - /url: /about
+            - link "Trust Center" [ref=e426] [cursor=pointer]:
+              - /url: /trust
+            - link "Security" [ref=e427] [cursor=pointer]:
+              - /url: /security
+            - link "Compliance" [ref=e428] [cursor=pointer]:
+              - /url: /compliance
+            - link "Contact" [ref=e429] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=e430]:
+          - paragraph [ref=e431]: Legal
+          - generic [ref=e432]:
+            - link "Privacy" [ref=e433] [cursor=pointer]:
+              - /url: /privacy
+            - link "Terms" [ref=e434] [cursor=pointer]:
+              - /url: /terms
+      - separator [ref=e435]
+      - generic [ref=e436]:
+        - generic [ref=e437]: © 2026 Vaultex — AI Trust Infrastructure
+        - generic [ref=e438]: GLBA · GDPR · SOC 2 · NIST AI RMF aligned
+  - alert [ref=e439]

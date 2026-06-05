@@ -58,10 +58,13 @@ class AuditLogger:
     # Internal helpers
     # ------------------------------------------------------------------
 
-    def _day_key(self, date_str: Optional[str] = None) -> str:
+    def _day_key(
+        self, date_str: Optional[str] = None, tenant_id: Optional[str] = None
+    ) -> str:
+        tenant = tenant_id or self.tenant_id
         if not date_str:
             date_str = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d")
-        return f"audit:{self.tenant_id}:{date_str}"
+        return f"audit:{tenant}:{date_str}"
 
     # ------------------------------------------------------------------
     # Public API
@@ -74,23 +77,25 @@ class AuditLogger:
         session_id: Optional[str] = None,
         role: Optional[str] = None,
         details: Optional[dict] = None,
+        tenant_id: Optional[str] = None,
     ) -> None:
         """Append a single structured entry to today's audit log.
 
-        All fields are mandatory except ``session_id``, ``role``, and
-        ``details``.  The entry is JSON-serialised and appended atomically
-        via Redis RPUSH.
+        ``tenant_id`` (Gap 3) namespaces the log per tenant; when omitted it
+        falls back to the logger's default tenant for back-compat.
+        The entry is JSON-serialised and appended atomically via Redis RPUSH.
         """
         entry = {
             "id": str(uuid.uuid4()),
             "timestamp": datetime.now(tz=timezone.utc).isoformat(),
             "event_type": event_type,
+            "tenant_id": tenant_id or self.tenant_id,
             "correlation_id": correlation_id,
             "session_id": session_id,
             "role": role,
             "details": details or {},
         }
-        key = self._day_key()
+        key = self._day_key(tenant_id=tenant_id)
         await self.redis.rpush(key, json.dumps(entry))
         await self.redis.expire(key, self.ttl)
         log.debug("audit_event", event_type=event_type, correlation_id=correlation_id)
@@ -99,16 +104,18 @@ class AuditLogger:
         self,
         date: Optional[str] = None,
         limit: int = 500,
+        tenant_id: Optional[str] = None,
     ) -> list[dict]:
         """Return the most-recent ``limit`` entries for the given UTC date.
 
         Args:
-            date:  ISO 8601 date string (``YYYY-MM-DD``).  Defaults to today.
-            limit: Maximum number of entries to return (capped at 500).
+            date:      ISO 8601 date string (``YYYY-MM-DD``).  Defaults to today.
+            limit:     Maximum number of entries to return (capped at 500).
+            tenant_id: Tenant to read (Gap 3); defaults to the logger's tenant.
 
         Returns:
             List of audit entry dicts, oldest-first within the page.
         """
-        key = self._day_key(date)
+        key = self._day_key(date, tenant_id=tenant_id)
         entries = await self.redis.lrange(key, -min(limit, 500), -1)
         return [json.loads(e) for e in entries]

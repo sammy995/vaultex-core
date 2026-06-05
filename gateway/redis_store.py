@@ -4,22 +4,42 @@ import base64
 from typing import Dict, Optional
 
 import redis.asyncio as aioredis
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, MultiFernet
 
 from gateway.config import settings
 
 
-def _get_fernet() -> Fernet:
-    """Derive a stable Fernet key from JWT_SECRET via SHA-256."""
-    key_bytes = hashlib.sha256(settings.jwt_secret.encode()).digest()
-    fernet_key = base64.urlsafe_b64encode(key_bytes)
-    return Fernet(fernet_key)
+def _derive_fernet_key(secret: str) -> bytes:
+    """Derive a stable Fernet key from a secret via SHA-256."""
+    return base64.urlsafe_b64encode(hashlib.sha256(secret.encode()).digest())
+
+
+def _get_multifernet() -> MultiFernet:
+    """MultiFernet over [current, *previous] data-encryption keys (key rotation).
+
+    Encrypts with the current key, decrypts with any configured key, so rotating
+    the secret keeps existing vault entries readable during the grace window.
+
+    DB4 key split: the current key is the dedicated ``encryption_secret``,
+    falling back to ``jwt_secret`` when unset (back-compat with vaults written
+    before signing/encryption keys were separated). Previous keys come from
+    ``encryption_previous_secrets``, falling back to ``jwt_previous_secrets``.
+    """
+    current = settings.encryption_secret or settings.jwt_secret
+    previous = (
+        getattr(settings, "encryption_previous_secrets", "")
+        or getattr(settings, "jwt_previous_secrets", "")
+        or ""
+    )
+    secrets_list = [current]
+    secrets_list += [s.strip() for s in previous.split(",") if s.strip()]
+    return MultiFernet([Fernet(_derive_fernet_key(s)) for s in secrets_list])
 
 
 class SessionStore:
     def __init__(self, redis_url: str):
         self.redis = aioredis.from_url(redis_url, decode_responses=True)
-        self.fernet = _get_fernet()
+        self.fernet = _get_multifernet()
         self.TTL = 3600  # 1 hour
 
     # --- Provider config ---
@@ -44,16 +64,31 @@ class SessionStore:
             ).decode()
         return config
 
+    # --- Session ownership (DB3: bind a session to its creator) ---
+
+    async def set_session_owner(self, session_id: str, sub: str, tenant: str) -> None:
+        key = f"session:{session_id}:owner"
+        await self.redis.setex(key, self.TTL, json.dumps({"sub": sub, "tenant": tenant}))
+
+    async def get_session_owner(self, session_id: str) -> Optional[dict]:
+        data = await self.redis.get(f"session:{session_id}:owner")
+        return json.loads(data) if data else None
+
     # --- Token map ---
 
     async def set_token_map(self, session_id: str, token_map: Dict[str, str]) -> None:
+        # DB2: the token map is the token->real-PII reversal vault. Encrypt it at
+        # rest so raw PII never sits readable in Redis.
         key = f"session:{session_id}:tokens"
-        await self.redis.setex(key, self.TTL, json.dumps(token_map))
+        blob = self.fernet.encrypt(json.dumps(token_map).encode()).decode()
+        await self.redis.setex(key, self.TTL, blob)
 
     async def get_token_map(self, session_id: str) -> Dict[str, str]:
         key = f"session:{session_id}:tokens"
         data = await self.redis.get(key)
-        return json.loads(data) if data else {}
+        if not data:
+            return {}
+        return json.loads(self.fernet.decrypt(data.encode()).decode())
 
     async def update_token_map(self, session_id: str, new_tokens: Dict[str, str]) -> None:
         existing = await self.get_token_map(session_id)

@@ -1,0 +1,131 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Vaultex AI Trust Infrastructure" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: Vaultex
+        - generic [ref=e7]: AI Trust Infrastructure
+      - generic [ref=e8]:
+        - link "Platform" [ref=e9] [cursor=pointer]:
+          - /url: /#platform
+        - link "Security" [ref=e10] [cursor=pointer]:
+          - /url: /security
+        - link "Compliance" [ref=e11] [cursor=pointer]:
+          - /url: /compliance
+        - link "Pricing" [ref=e12] [cursor=pointer]:
+          - /url: /pricing
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e14]:
+        - link "GitHub" [ref=e15] [cursor=pointer]:
+          - /url: https://github.com/sammy995/vaultex
+          - img [ref=e16]
+          - text: GitHub
+        - link "Try the demo" [ref=e18] [cursor=pointer]:
+          - /url: /tokenize
+  - generic [ref=e20]:
+    - generic [ref=e21]:
+      - button "PII Tokenizer" [ref=e22] [cursor=pointer]
+      - button "? How it works" [ref=e23] [cursor=pointer]
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - img [ref=e26]
+        - generic [ref=e28]: PII Tokenization Gateway
+      - heading "Connect your LLM" [level=1] [ref=e29]
+      - paragraph [ref=e30]: All PII is tokenized locally before it reaches any model provider.
+    - generic [ref=e31]:
+      - generic [ref=e33]: "1"
+      - generic [ref=e36]: "2"
+      - generic [ref=e39]: "3"
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]: 🚀
+        - generic [ref=e43]:
+          - paragraph [ref=e44]: Under 30 minutes, from zero to protected
+          - paragraph [ref=e45]: "The five steps below are the complete deployment path. Total elapsed time: ~10 minutes on a prepared machine, ~30 minutes including model setup and first test. Click any step to see the exact commands and expected output."
+      - generic [ref=e46]:
+        - button "01 Prerequisites Docker Desktop installed and running. Either an Anthropic/OpenAI API key, or Ollama installed locally (free, zero egress). ~2 min ▾" [ref=e48] [cursor=pointer]:
+          - generic [ref=e50]: "01"
+          - generic [ref=e51]:
+            - generic [ref=e52]: Prerequisites
+            - generic [ref=e53]: Docker Desktop installed and running. Either an Anthropic/OpenAI API key, or Ollama installed locally (free, zero egress).
+          - generic [ref=e54]:
+            - generic [ref=e55]: ~2 min
+            - generic [ref=e56]: ▾
+        - button "02 Pull and start the gateway One docker-compose command starts the FastAPI gateway, Presidio NER engine, and Redis token vault — all in your network. ~3 min ▾" [ref=e58] [cursor=pointer]:
+          - generic [ref=e60]: "02"
+          - generic [ref=e61]:
+            - generic [ref=e62]: Pull and start the gateway
+            - generic [ref=e63]: One docker-compose command starts the FastAPI gateway, Presidio NER engine, and Redis token vault — all in your network.
+          - generic [ref=e64]:
+            - generic [ref=e65]: ~3 min
+            - generic [ref=e66]: ▾
+        - button "03 Point your SDK at the gateway Change one line in your existing Python or Node code. No other modifications needed. ~1 min ▾" [ref=e68] [cursor=pointer]:
+          - generic [ref=e70]: "03"
+          - generic [ref=e71]:
+            - generic [ref=e72]: Point your SDK at the gateway
+            - generic [ref=e73]: Change one line in your existing Python or Node code. No other modifications needed.
+          - generic [ref=e74]:
+            - generic [ref=e75]: ~1 min
+            - generic [ref=e76]: ▾
+        - button "04 Send a test prompt Run a curl to verify PII is being tokenized before leaving the gateway. ~2 min ▾" [ref=e78] [cursor=pointer]:
+          - generic [ref=e80]: "04"
+          - generic [ref=e81]:
+            - generic [ref=e82]: Send a test prompt
+            - generic [ref=e83]: Run a curl to verify PII is being tokenized before leaving the gateway.
+          - generic [ref=e84]:
+            - generic [ref=e85]: ~2 min
+            - generic [ref=e86]: ▾
+        - button "05 Check the audit log Every request is logged with a correlation ID, entity counts, and role. Accessible via the admin console or direct Redis query. ~2 min ▾" [ref=e88] [cursor=pointer]:
+          - generic [ref=e90]: "05"
+          - generic [ref=e91]:
+            - generic [ref=e92]: Check the audit log
+            - generic [ref=e93]: Every request is logged with a correlation ID, entity counts, and role. Accessible via the admin console or direct Redis query.
+          - generic [ref=e94]:
+            - generic [ref=e95]: ~2 min
+            - generic [ref=e96]: ▾
+      - paragraph [ref=e97]: Commands target vaultex v0.x · Tested on macOS (Apple Silicon), Linux (x86_64), Windows with WSL2
+    - generic [ref=e98]:
+      - paragraph [ref=e99]: Step 1 — Choose your LLM provider
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - img [ref=e103]
+          - generic [ref=e105]:
+            - generic [ref=e106]:
+              - text: Anthropic
+              - generic [ref=e107]: Claude models — cloud, PII-stripped
+              - generic [ref=e108]: Pro
+            - generic [ref=e109]: "The gateway tokenizes all PII before the request leaves your machine. Anthropic's API only ever receives {{PERSON_1}}-style tokens — never raw names, SSNs, or emails."
+            - generic [ref=e110]:
+              - img [ref=e111]
+              - generic [ref=e114]: Requires Pro plan —
+              - link "Book a Demo" [ref=e115] [cursor=pointer]:
+                - /url: mailto:hello@vaultex.space?subject=Vaultex%20Professional%20Plan%20%E2%80%94%20Demo%20Request
+          - img [ref=e116]
+        - generic [ref=e119]:
+          - img [ref=e121]
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - text: OpenAI
+              - generic [ref=e125]: GPT models — cloud, PII-stripped
+              - generic [ref=e126]: Pro
+            - generic [ref=e127]: Same intercept model as Anthropic — Presidio NER strips PII locally, then the tokenized prompt is forwarded to OpenAI. GPT never sees a single real identifier.
+            - generic [ref=e128]:
+              - img [ref=e129]
+              - generic [ref=e132]: Requires Pro plan —
+              - link "Book a Demo" [ref=e133] [cursor=pointer]:
+                - /url: mailto:hello@vaultex.space?subject=Vaultex%20Professional%20Plan%20%E2%80%94%20Demo%20Request
+          - img [ref=e134]
+        - generic [ref=e137] [cursor=pointer]:
+          - img [ref=e139]
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - text: Ollama
+              - generic [ref=e144]: Local models — zero cloud egress
+            - generic [ref=e145]: Everything runs on your own hardware. Zero API cost, zero cloud egress, zero data ever leaves your network. Strongest compliance posture. Included in the free Starter tier.
+          - img [ref=e146]
+      - button "Next" [ref=e150] [cursor=pointer]:
+        - text: Next
+        - img [ref=e151]
+  - button "Open Next.js Dev Tools" [ref=e158] [cursor=pointer]:
+    - img [ref=e159]

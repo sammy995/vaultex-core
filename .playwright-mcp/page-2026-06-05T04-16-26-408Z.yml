@@ -1,0 +1,248 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Vaultex AI Trust Infrastructure" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: Vaultex
+        - generic [ref=e7]: AI Trust Infrastructure
+      - generic [ref=e8]:
+        - link "Platform" [ref=e9] [cursor=pointer]:
+          - /url: /#platform
+        - link "Security" [ref=e10] [cursor=pointer]:
+          - /url: /security
+        - link "Compliance" [ref=e11] [cursor=pointer]:
+          - /url: /compliance
+        - link "Pricing" [ref=e12] [cursor=pointer]:
+          - /url: /pricing
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e14]:
+        - link "GitHub" [ref=e15] [cursor=pointer]:
+          - /url: https://github.com/sammy995/vaultex
+          - img [ref=e16]
+          - text: GitHub
+        - link "Try the demo" [ref=e18] [cursor=pointer]:
+          - /url: /tokenize
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: Pricing
+        - generic [ref=e23]: Open core · Apache-2.0
+      - generic [ref=e24]:
+        - heading "Open to start. Priced to trust." [level=1] [ref=e25]
+        - paragraph [ref=e26]:
+          - text: The interfaces, reference detectors, classifier, and SDKs are
+          - link "open source" [ref=e27] [cursor=pointer]:
+            - /url: https://github.com/sammy995/vaultex
+          - text: "and always will be. We earn on what regulated institutions actually need: tuned detection, managed governance, and compliance evidence."
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e31]: Open Source
+          - generic [ref=e32]:
+            - generic [ref=e33]: $0
+            - generic [ref=e34]: Apache-2.0
+          - paragraph [ref=e35]: Self-host the open wedge. Reference detectors, classifier, integrations, and SDKs — no lock-in, no egress.
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - img [ref=e38]
+              - generic [ref=e40]: finsafe-core + classifier + integrations
+            - generic [ref=e41]:
+              - img [ref=e42]
+              - generic [ref=e44]: Python & TypeScript SDKs
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - generic [ref=e48]: Governance Service contracts
+            - generic [ref=e49]:
+              - img [ref=e50]
+              - generic [ref=e52]: Self-host with Ollama (local) — zero egress
+            - generic [ref=e53]:
+              - img [ref=e54]
+              - generic [ref=e56]: Community support
+          - link "View on GitHub" [ref=e57] [cursor=pointer]:
+            - /url: https://github.com/sammy995/vaultex
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]: Professional
+            - generic [ref=e61]: POPULAR
+          - generic [ref=e62]:
+            - generic [ref=e63]: $299
+            - generic [ref=e64]: / month
+          - paragraph [ref=e65]: Hosted gateway with tuned detection, the semantic classifier, and the governance console.
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - img [ref=e68]
+              - generic [ref=e70]: Tuned detectors + semantic classifier
+            - generic [ref=e71]:
+              - img [ref=e72]
+              - generic [ref=e74]: Anthropic · OpenAI · Ollama routing (PII-stripped)
+            - generic [ref=e75]:
+              - img [ref=e76]
+              - generic [ref=e78]: Governance dashboard + policy versioning
+            - generic [ref=e79]:
+              - img [ref=e80]
+              - generic [ref=e82]: 90-day immutable audit retention
+            - generic [ref=e83]:
+              - img [ref=e84]
+              - generic [ref=e86]: Role-based detokenization controls
+            - generic [ref=e87]:
+              - img [ref=e88]
+              - generic [ref=e90]: Priority email support
+          - link "Start a trial" [ref=e91] [cursor=pointer]:
+            - /url: /setup
+        - generic [ref=e92]:
+          - generic [ref=e94]: Enterprise
+          - generic [ref=e95]:
+            - generic [ref=e96]: Custom
+            - generic [ref=e97]: BFSI
+          - paragraph [ref=e98]: For regulated institutions that need it on their own terms — on their own infrastructure.
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - img [ref=e101]
+              - generic [ref=e103]: On-prem / private VPC deployment
+            - generic [ref=e104]:
+              - img [ref=e105]
+              - generic [ref=e107]: SOC 2 Type II report + BFSI risk taxonomy
+            - generic [ref=e108]:
+              - img [ref=e109]
+              - generic [ref=e111]: SSO / SAML, custom RBAC, separation of duties
+            - generic [ref=e112]:
+              - img [ref=e113]
+              - generic [ref=e115]: Evidence packs + reviewer attestations
+            - generic [ref=e116]:
+              - img [ref=e117]
+              - generic [ref=e119]: Custom retention & data residency
+            - generic [ref=e120]:
+              - img [ref=e121]
+              - generic [ref=e123]: Dedicated support + 99.9% uptime SLA
+          - link "Contact sales" [ref=e124] [cursor=pointer]:
+            - /url: mailto:hello@vaultex.space?subject=Vaultex%20Enterprise
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - text: For regulated buyers · early access
+          - heading "Start with a scoped pilot — built to pass security review, not just a demo." [level=2] [ref=e128]
+        - generic [ref=e129]:
+          - paragraph [ref=e130]: "A fixed-scope, 2–4 week proof of concept on your infrastructure. Includes:"
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - img [ref=e133]
+              - generic [ref=e135]: Hands-on deployment in your environment
+            - generic [ref=e136]:
+              - img [ref=e137]
+              - generic [ref=e139]: Source review of the open-core components (SAST/SCA-friendly)
+            - generic [ref=e140]:
+              - img [ref=e141]
+              - generic [ref=e143]: Written answers to your security questionnaire + architecture brief
+            - generic [ref=e144]:
+              - img [ref=e145]
+              - generic [ref=e147]: PII-detection tuning on a sample of your real workflows
+          - link "Scope a pilot →" [ref=e148] [cursor=pointer]:
+            - /url: mailto:hello@vaultex.space?subject=Vaultex%20pilot
+      - heading "Full comparison" [level=2] [ref=e149]
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - generic [ref=e152]: Capability
+          - generic [ref=e153]: Open Source
+          - generic [ref=e154]: Professional
+          - generic [ref=e155]: Enterprise
+        - generic [ref=e156]:
+          - generic [ref=e157]: Runtime detectors
+          - generic [ref=e158]: Reference heuristics
+          - generic [ref=e159]: Tuned detectors
+          - generic [ref=e160]: Tuned + custom
+        - generic [ref=e161]:
+          - generic [ref=e162]: Data classification
+          - generic [ref=e163]: Regex / NER
+          - generic [ref=e164]: Semantic model
+          - generic [ref=e165]: Semantic + BFSI taxonomy
+        - generic [ref=e166]:
+          - generic [ref=e167]: LLM routing
+          - generic [ref=e168]: Ollama (local)
+          - generic [ref=e169]: Anthropic · OpenAI · Ollama
+          - generic [ref=e170]: All + private endpoints
+        - generic [ref=e171]:
+          - generic [ref=e172]: Audit retention
+          - generic [ref=e173]: Self-managed
+          - generic [ref=e174]: 90 days
+          - generic [ref=e175]: Custom
+        - generic [ref=e176]:
+          - generic [ref=e177]: Policy versioning + approvals
+          - generic [ref=e178]: –
+          - generic [ref=e179]: ✓
+          - generic [ref=e180]: ✓ + dual-approval
+        - generic [ref=e181]:
+          - generic [ref=e182]: Evidence packs
+          - generic [ref=e183]: –
+          - generic [ref=e184]: ✓
+          - generic [ref=e185]: ✓ + attestations
+        - generic [ref=e186]:
+          - generic [ref=e187]: SOC 2 Type II
+          - generic [ref=e188]: –
+          - generic [ref=e189]: –
+          - generic [ref=e190]: ✓
+        - generic [ref=e191]:
+          - generic [ref=e192]: Deployment
+          - generic [ref=e193]: Self-host (Docker)
+          - generic [ref=e194]: Hosted / Docker
+          - generic [ref=e195]: Private VPC / on-prem
+        - generic [ref=e196]:
+          - generic [ref=e197]: Support
+          - generic [ref=e198]: Community
+          - generic [ref=e199]: Priority email
+          - generic [ref=e200]: Dedicated + SLA
+      - generic [ref=e201]:
+        - paragraph [ref=e202]: Questions about Enterprise terms or a compliance review?
+        - link "Talk to sales →" [ref=e203] [cursor=pointer]:
+          - /url: mailto:hello@vaultex.space
+  - contentinfo [ref=e204]:
+    - generic [ref=e205]:
+      - generic [ref=e206]:
+        - generic [ref=e207]:
+          - text: Vaultex
+          - paragraph [ref=e208]: The trust layer between regulated enterprises and the LLMs they use. Input governance, runtime safety, and an immutable governance engine.
+          - paragraph [ref=e209]: Open-source · Apache-2.0
+        - generic [ref=e210]:
+          - paragraph [ref=e211]: Platform
+          - generic [ref=e212]:
+            - link "Input governance" [ref=e213] [cursor=pointer]:
+              - /url: /#platform
+            - link "Runtime & FIN-SAFE" [ref=e214] [cursor=pointer]:
+              - /url: /security
+            - link "Governance engine" [ref=e215] [cursor=pointer]:
+              - /url: /#governance
+            - link "Pricing" [ref=e216] [cursor=pointer]:
+              - /url: /pricing
+        - generic [ref=e217]:
+          - paragraph [ref=e218]: Open source
+          - generic [ref=e219]:
+            - link "GitHub — vaultex" [ref=e220] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex
+            - link "Contracts & API" [ref=e221] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/tree/main/contracts
+            - link "Report an issue" [ref=e222] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/issues
+        - generic [ref=e223]:
+          - paragraph [ref=e224]: Company
+          - generic [ref=e225]:
+            - link "About" [ref=e226] [cursor=pointer]:
+              - /url: /about
+            - link "Trust Center" [ref=e227] [cursor=pointer]:
+              - /url: /trust
+            - link "Security" [ref=e228] [cursor=pointer]:
+              - /url: /security
+            - link "Compliance" [ref=e229] [cursor=pointer]:
+              - /url: /compliance
+            - link "Contact" [ref=e230] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=e231]:
+          - paragraph [ref=e232]: Legal
+          - generic [ref=e233]:
+            - link "Privacy" [ref=e234] [cursor=pointer]:
+              - /url: /privacy
+            - link "Terms" [ref=e235] [cursor=pointer]:
+              - /url: /terms
+      - separator [ref=e236]
+      - generic [ref=e237]:
+        - generic [ref=e238]: © 2026 Vaultex — AI Trust Infrastructure
+        - generic [ref=e239]: GLBA · GDPR · SOC 2 · NIST AI RMF aligned
+  - button "Open Next.js Dev Tools" [ref=e245] [cursor=pointer]:
+    - img [ref=e246]

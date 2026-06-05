@@ -4,6 +4,11 @@ import jwt as pyjwt
 
 from gateway.config import settings
 
+# Roles that may NEVER be minted by the credential-free token endpoint (DB1).
+# These can detokenize regulated PII and/or read audit logs, so they require a
+# real authenticated identity (SSO / bcrypt login), never a self-asserted role.
+PRIVILEGED_ROLES: frozenset[str] = frozenset({"admin", "vp_risk"})
+
 # What each role is allowed to see in plain text (all others stay tokenized)
 ROLE_PERMISSIONS: dict[str, Set[str]] = {
     "junior_analyst": set(),

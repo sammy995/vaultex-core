@@ -1,0 +1,438 @@
+- generic [ref=e2]:
+  - navigation "Main navigation" [ref=e3]:
+    - generic [ref=e4]:
+      - link "Vaultex AI Trust Infrastructure" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: Vaultex
+        - generic [ref=e8]: AI Trust Infrastructure
+      - generic [ref=e9]:
+        - link "Platform" [ref=e10] [cursor=pointer]:
+          - /url: /#platform
+        - link "Security" [ref=e11] [cursor=pointer]:
+          - /url: /security
+        - link "Compliance" [ref=e12] [cursor=pointer]:
+          - /url: /compliance
+        - link "Pricing" [ref=e13] [cursor=pointer]:
+          - /url: /pricing
+        - link "About" [ref=e14] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e15]:
+        - link "GitHub" [ref=e16] [cursor=pointer]:
+          - /url: https://github.com/sammy995/vaultex
+          - img [ref=e17]
+          - text: GitHub
+        - link "Try the demo" [ref=e19] [cursor=pointer]:
+          - /url: /tokenize
+  - banner [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]: Est. for regulated AI
+        - generic [ref=e24]: No. 01 — The Trust Layer
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - heading "The trust layer between your enterprise and its LLMs." [level=1] [ref=e27]:
+            - text: The trust layer
+            - text: between your
+            - text: enterprise and its LLMs.
+          - paragraph [ref=e28]: Keep regulated data out of prompts. Catch runtime AI risk as it happens. Produce the audit evidence regulators ask for — on one open-core platform.
+          - generic [ref=e29]:
+            - link "Try the demo" [ref=e30] [cursor=pointer]:
+              - /url: /tokenize
+              - text: Try the demo
+              - img [ref=e31]
+            - link "Read the source" [ref=e33] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex
+              - text: Read the source
+              - img [ref=e34]
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - generic [ref=e40]: vaultex · gateway · outbound
+            - generic [ref=e41]: ● RAW — CONTAINS PII
+          - generic [ref=e42]:
+            - paragraph [ref=e43]:
+              - text: Approve a
+              - strong [ref=e44]: $42,500
+              - text: loan for Jane Smith — SSN 123-45-6789, account ACC-00198234. Credit score
+              - strong [ref=e45]: "742"
+              - text: ","
+              - strong [ref=e46]: "0"
+              - text: days past due.
+            - generic [ref=e47]:
+              - generic [ref=e48]: Identifiers redacted · financial values preserved for analytics.
+              - button "View tokenized" [ref=e49] [cursor=pointer]
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: < 8ms
+          - generic [ref=e53]: added latency / request
+        - generic [ref=e54]:
+          - generic [ref=e55]: 14+
+          - generic [ref=e56]: PII entity types
+        - generic [ref=e57]:
+          - generic [ref=e58]: 100%
+          - generic [ref=e59]: prompts tokenized first
+        - generic [ref=e60]:
+          - generic [ref=e61]: "0"
+          - generic [ref=e62]: raw PII stored
+      - paragraph [ref=e63]: "* p95 added latency tokenizing a 512-token prompt with 5 PII entities (local Presidio, en_core_web_lg). Varies by host hardware and entity density — benchmark on your own infra."
+  - generic [ref=e65]:
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - generic [ref=e68]: "01"
+        - generic [ref=e70]: The platform
+      - heading "Three planes, one trust fabric." [level=2] [ref=e71]
+      - paragraph [ref=e72]: Most teams bolt point tools onto AI after the fact. Vaultex governs the whole path — what goes in, what comes out, and the record that proves it.
+    - generic [ref=e73]:
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]: "01"
+          - generic [ref=e78]: Vaultex
+        - heading "Input governance" [level=3] [ref=e79]
+        - paragraph [ref=e80]: Classify and tokenize PII and MNPI before any prompt leaves your network. Role-aware detokenization on the way back — and financial variables stay intact so analytics never break.
+        - generic [ref=e81]:
+          - generic [ref=e82]:
+            - img [ref=e83]
+            - generic [ref=e85]: Semantic + NER classification
+          - generic [ref=e86]:
+            - img [ref=e87]
+            - generic [ref=e89]: Reversible tokenization
+          - generic [ref=e90]:
+            - img [ref=e91]
+            - generic [ref=e93]: Role-based disclosure
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]: "02"
+          - generic [ref=e98]: AgentGuard · FIN-SAFE
+        - heading "Runtime & safety" [level=3] [ref=e99]
+        - paragraph [ref=e100]: Watch what models actually do. Detect prompt injection, PII leakage, and jailbreaks on input and output, score model risk, and track cost-per-success verdicts per agent.
+        - generic [ref=e101]:
+          - generic [ref=e102]:
+            - img [ref=e103]
+            - generic [ref=e105]: Injection & jailbreak detection
+          - generic [ref=e106]:
+            - img [ref=e107]
+            - generic [ref=e109]: PII-leakage screening
+          - generic [ref=e110]:
+            - img [ref=e111]
+            - generic [ref=e113]: Model-risk scoring
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - generic [ref=e117]: "03"
+          - generic [ref=e118]: The trust fabric
+        - heading "Governance engine" [level=3] [ref=e119]
+        - paragraph [ref=e120]: Versioned policies, dual-approval with separation of duties, and a hash-chained, append-only audit log. Export evidence packs a risk committee — and a regulator — will accept.
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - img [ref=e123]
+            - generic [ref=e125]: Policy versioning + approvals
+          - generic [ref=e126]:
+            - img [ref=e127]
+            - generic [ref=e129]: Immutable audit chain
+          - generic [ref=e130]:
+            - img [ref=e131]
+            - generic [ref=e133]: Evidence packs
+  - generic [ref=e135]:
+    - generic [ref=e136]:
+      - generic [ref=e137]:
+        - generic [ref=e138]: ·
+        - generic [ref=e140]: Scope, honestly
+      - heading "The trust layer — not a replacement for your whole AI stack." [level=2] [ref=e141]
+    - generic [ref=e142]:
+      - generic [ref=e144]:
+        - text: What Vaultex does
+        - generic [ref=e145]:
+          - generic [ref=e146]:
+            - img [ref=e147]
+            - generic [ref=e149]: Tokenize PII/MNPI before prompts leave your network
+          - generic [ref=e150]:
+            - img [ref=e151]
+            - generic [ref=e153]: Role-aware detokenization (RBAC at the token level)
+          - generic [ref=e154]:
+            - img [ref=e155]
+            - generic [ref=e157]: "Runtime screening: prompt injection, PII leakage, jailbreaks"
+          - generic [ref=e158]:
+            - img [ref=e159]
+            - generic [ref=e161]: Versioned policy + immutable, hash-chained audit + evidence packs
+          - generic [ref=e162]:
+            - img [ref=e163]
+            - generic [ref=e165]: OpenTelemetry / SIEM / OIDC integration hooks
+      - generic [ref=e167]:
+        - text: What it isn't (use alongside)
+        - generic [ref=e168]:
+          - generic [ref=e169]:
+            - generic [ref=e170]: —
+            - generic [ref=e171]: Not a full model-risk-management (SR 11-7) suite
+          - generic [ref=e172]:
+            - generic [ref=e173]: —
+            - generic [ref=e174]: Not your LLM gateway/router — it sits in front of one
+          - generic [ref=e175]:
+            - generic [ref=e176]: —
+            - generic [ref=e177]: Not broad endpoint DLP or CASB
+          - generic [ref=e178]:
+            - generic [ref=e179]: —
+            - generic [ref=e180]: Not an APM / observability platform (it feeds yours)
+          - generic [ref=e181]:
+            - generic [ref=e182]: —
+            - generic [ref=e183]: Not an IAM/SSO provider (it integrates with yours)
+        - paragraph [ref=e184]: Vaultex is the governance & privacy control point — it complements your routing, IAM, and observability rather than replacing them.
+  - generic [ref=e187]:
+    - text: The collision
+    - paragraph [ref=e188]: A bank doesn't ask "how many tokens did the model use?" It asks whether an AI system violated lending policy or exposed regulated customer data.
+    - paragraph [ref=e189]: Analysts paste SSNs into chatbots. Cloud models retain prompts. Junior staff see VP-level data. Every unguarded prompt is a compliance incident waiting for an auditor.
+  - generic [ref=e191]:
+    - generic [ref=e192]:
+      - generic [ref=e193]:
+        - generic [ref=e194]: "02"
+        - generic [ref=e196]: How it works
+      - heading "One governed round-trip." [level=2] [ref=e197]
+    - generic [ref=e198]:
+      - generic [ref=e200]:
+        - generic [ref=e201]: "01"
+        - generic [ref=e202]:
+          - heading "Classify" [level=3] [ref=e203]
+          - paragraph [ref=e204]: Sensitivity and entities are scored at the edge.
+      - generic [ref=e206]:
+        - generic [ref=e207]: "02"
+        - generic [ref=e208]:
+          - heading "Tokenize" [level=3] [ref=e209]
+          - paragraph [ref=e210]: Restricted data becomes reversible tokens. The model never sees raw PII.
+      - generic [ref=e212]:
+        - generic [ref=e213]: "03"
+        - generic [ref=e214]:
+          - heading "Screen" [level=3] [ref=e215]
+          - paragraph [ref=e216]: FIN-SAFE checks input and output for injection, leakage, and jailbreaks.
+      - generic [ref=e218]:
+        - generic [ref=e219]: "04"
+        - generic [ref=e220]:
+          - heading "Detokenize" [level=3] [ref=e221]
+          - paragraph [ref=e222]: Values are restored — only for roles authorized to see them.
+      - generic [ref=e224]:
+        - generic [ref=e225]: "05"
+        - generic [ref=e226]:
+          - heading "Prove" [level=3] [ref=e227]
+          - paragraph [ref=e228]: Every decision lands in the immutable audit chain with evidence.
+  - generic [ref=e231]:
+    - generic [ref=e232]:
+      - generic [ref=e233]:
+        - generic [ref=e234]: "03"
+        - generic [ref=e236]: The governance engine
+      - heading "History you can't quietly rewrite." [level=2] [ref=e237]
+      - paragraph [ref=e238]: Every policy decision, override, and detokenization is hash-chained into an append-only ledger. Change one row and the chain breaks — visibly.
+      - generic [ref=e239]:
+        - generic [ref=e240]:
+          - img [ref=e241]
+          - generic [ref=e243]: Policy versioning with dual-approval
+        - generic [ref=e244]:
+          - img [ref=e245]
+          - generic [ref=e247]: Separation of duties enforced
+        - generic [ref=e248]:
+          - img [ref=e249]
+          - generic [ref=e251]: Evidence packs for a 90-day window
+    - generic [ref=e253]:
+      - generic [ref=e254]:
+        - generic [ref=e255]: audit_events — tenant ledger
+        - generic [ref=e256]: ● chain verified
+      - generic [ref=e257]:
+        - generic [ref=e258]: seq
+        - generic [ref=e259]: event
+        - generic [ref=e260]: sev
+        - generic [ref=e261]: hash
+      - generic [ref=e262]:
+        - generic [ref=e263]: "014"
+        - generic [ref=e264]: policy.enforced
+        - generic [ref=e265]: high
+        - generic [ref=e266]: 9f3c…a1
+      - generic [ref=e267]:
+        - generic [ref=e268]: "015"
+        - generic [ref=e269]: pii.detokenized
+        - generic [ref=e270]: info
+        - generic [ref=e271]: b72e…4d
+      - generic [ref=e272]:
+        - generic [ref=e273]: "016"
+        - generic [ref=e274]: approval.decision
+        - generic [ref=e275]: info
+        - generic [ref=e276]: 1c08…e9
+      - generic [ref=e277]:
+        - generic [ref=e278]: "017"
+        - generic [ref=e279]: evidence.pack_built
+        - generic [ref=e280]: info
+        - generic [ref=e281]: 44af…02
+      - generic [ref=e283]: each entry_hash links to the previous · WORM-enforced
+  - generic [ref=e287]:
+    - generic [ref=e288]:
+      - text: Open core · Apache-2.0
+      - heading "Start on the open reference. Upgrade the brains." [level=2] [ref=e289]
+      - paragraph [ref=e290]: The interfaces, reference detectors, classifier, integrations, and SDKs are open and run standalone forever. The tuned detectors, semantic model, and BFSI taxonomy plug in behind the same interfaces.
+      - link "Explore the repository" [ref=e291] [cursor=pointer]:
+        - /url: https://github.com/sammy995/vaultex
+        - text: Explore the repository
+        - img [ref=e292]
+    - generic [ref=e296]: "import { DetectorRegistry, referenceDetectors, } from '@vaultex/finsafe-core'; const registry = new DetectorRegistry( referenceDetectors(), ); const findings = await registry.scan({ phase: 'input', text: userPrompt, }); // → [{ category: 'prompt_injection', // severity: 'high', ... }]"
+  - generic [ref=e298]:
+    - paragraph [ref=e299]: Mapped to the frameworks your auditors use
+    - generic [ref=e300]:
+      - generic [ref=e301]: NIST AI RMF
+      - generic [ref=e302]: SOC 2 Type II
+      - generic [ref=e303]: Fed SR 11-7
+      - generic [ref=e304]: GLBA
+      - generic [ref=e305]: GDPR
+      - generic [ref=e306]: EU AI Act
+      - generic [ref=e307]: OWASP LLM Top 10
+      - generic [ref=e308]: MITRE ATLAS
+  - generic [ref=e310]:
+    - generic [ref=e311]:
+      - generic [ref=e312]:
+        - generic [ref=e313]: "04"
+        - generic [ref=e315]: Pricing
+      - heading "Open to start. Priced to trust." [level=2] [ref=e316]
+    - generic [ref=e317]:
+      - generic [ref=e319]:
+        - generic [ref=e321]: Open Source
+        - generic [ref=e322]:
+          - generic [ref=e323]: $0
+          - generic [ref=e324]: Apache-2.0
+        - paragraph [ref=e325]: Self-host the wedge. Reference detectors, classifier, integrations, and SDKs.
+        - generic [ref=e326]:
+          - generic [ref=e327]:
+            - img [ref=e328]
+            - generic [ref=e330]: finsafe-core + classifier + integrations
+          - generic [ref=e331]:
+            - img [ref=e332]
+            - generic [ref=e334]: Python & TypeScript SDKs
+          - generic [ref=e335]:
+            - img [ref=e336]
+            - generic [ref=e338]: Governance contracts
+          - generic [ref=e339]:
+            - img [ref=e340]
+            - generic [ref=e342]: Community support
+        - link "View on GitHub" [ref=e343] [cursor=pointer]:
+          - /url: https://github.com/sammy995/vaultex
+      - generic [ref=e345]:
+        - generic [ref=e346]:
+          - generic [ref=e347]: Professional
+          - generic [ref=e348]: POPULAR
+        - generic [ref=e349]:
+          - generic [ref=e350]: $299
+          - generic [ref=e351]: / month
+        - paragraph [ref=e352]: Hosted gateway with tuned detection and the governance console.
+        - generic [ref=e353]:
+          - generic [ref=e354]:
+            - img [ref=e355]
+            - generic [ref=e357]: Tuned detectors + semantic classifier
+          - generic [ref=e358]:
+            - img [ref=e359]
+            - generic [ref=e361]: Governance dashboard
+          - generic [ref=e362]:
+            - img [ref=e363]
+            - generic [ref=e365]: 90-day evidence retention
+          - generic [ref=e366]:
+            - img [ref=e367]
+            - generic [ref=e369]: Anthropic · OpenAI · Ollama routing
+          - generic [ref=e370]:
+            - img [ref=e371]
+            - generic [ref=e373]: Priority support
+        - link "Start a trial" [ref=e374] [cursor=pointer]:
+          - /url: /setup
+      - generic [ref=e376]:
+        - generic [ref=e378]: Enterprise
+        - generic [ref=e379]:
+          - generic [ref=e380]: Custom
+          - generic [ref=e381]: BFSI
+        - paragraph [ref=e382]: For regulated institutions that need it on their own terms.
+        - generic [ref=e383]:
+          - generic [ref=e384]:
+            - img [ref=e385]
+            - generic [ref=e387]: On-prem / private VPC
+          - generic [ref=e388]:
+            - img [ref=e389]
+            - generic [ref=e391]: SOC 2 report + BFSI taxonomy
+          - generic [ref=e392]:
+            - img [ref=e393]
+            - generic [ref=e395]: SSO / SAML, custom RBAC
+          - generic [ref=e396]:
+            - img [ref=e397]
+            - generic [ref=e399]: Evidence packs + attestations
+          - generic [ref=e400]:
+            - img [ref=e401]
+            - generic [ref=e403]: 99.9% uptime SLA
+        - link "Contact sales" [ref=e404] [cursor=pointer]:
+          - /url: mailto:hello@vaultex.space?subject=Vaultex%20Enterprise
+  - generic [ref=e407]:
+    - generic [ref=e408]:
+      - generic [ref=e409]:
+        - generic [ref=e410]: "05"
+        - generic [ref=e412]: Questions
+      - heading "The honest answers." [level=2] [ref=e413]
+    - generic [ref=e415]:
+      - button "Does the LLM ever see raw PII?" [ref=e417] [cursor=pointer]:
+        - generic [ref=e418]: Does the LLM ever see raw PII?
+        - img [ref=e419]
+      - button "Does tokenization break analytics?" [ref=e421] [cursor=pointer]:
+        - generic [ref=e422]: Does tokenization break analytics?
+        - img [ref=e423]
+      - button "What makes the audit trail credible to regulators?" [ref=e425] [cursor=pointer]:
+        - generic [ref=e426]: What makes the audit trail credible to regulators?
+        - img [ref=e427]
+      - button "What's open-source vs paid?" [ref=e429] [cursor=pointer]:
+        - generic [ref=e430]: What's open-source vs paid?
+        - img [ref=e431]
+  - generic [ref=e434]:
+    - heading "Make your AI provable." [level=2] [ref=e435]
+    - paragraph [ref=e436]: Run the open reference in minutes — or talk to us about bank-grade detection and managed compliance evidence.
+    - generic [ref=e437]:
+      - link "Try the demo" [ref=e438] [cursor=pointer]:
+        - /url: /tokenize
+        - text: Try the demo
+        - img [ref=e439]
+      - link "Book a demo" [ref=e441] [cursor=pointer]:
+        - /url: mailto:hello@vaultex.space?subject=Vaultex%20Demo
+  - contentinfo [ref=e442]:
+    - generic [ref=e443]:
+      - generic [ref=e444]:
+        - generic [ref=e445]:
+          - text: Vaultex
+          - paragraph [ref=e446]: The trust layer between regulated enterprises and the LLMs they use. Input governance, runtime safety, and an immutable governance engine.
+          - paragraph [ref=e447]: Open-source · Apache-2.0
+        - generic [ref=e448]:
+          - paragraph [ref=e449]: Platform
+          - generic [ref=e450]:
+            - link "Input governance" [ref=e451] [cursor=pointer]:
+              - /url: /#platform
+            - link "Runtime & FIN-SAFE" [ref=e452] [cursor=pointer]:
+              - /url: /security
+            - link "Governance engine" [ref=e453] [cursor=pointer]:
+              - /url: /#governance
+            - link "Pricing" [ref=e454] [cursor=pointer]:
+              - /url: /pricing
+        - generic [ref=e455]:
+          - paragraph [ref=e456]: Open source
+          - generic [ref=e457]:
+            - link "GitHub — vaultex" [ref=e458] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex
+            - link "Contracts & API" [ref=e459] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/tree/main/contracts
+            - link "Report an issue" [ref=e460] [cursor=pointer]:
+              - /url: https://github.com/sammy995/vaultex/issues
+        - generic [ref=e461]:
+          - paragraph [ref=e462]: Company
+          - generic [ref=e463]:
+            - link "About" [ref=e464] [cursor=pointer]:
+              - /url: /about
+            - link "Trust Center" [ref=e465] [cursor=pointer]:
+              - /url: /trust
+            - link "Security" [ref=e466] [cursor=pointer]:
+              - /url: /security
+            - link "Compliance" [ref=e467] [cursor=pointer]:
+              - /url: /compliance
+            - link "Contact" [ref=e468] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=e469]:
+          - paragraph [ref=e470]: Legal
+          - generic [ref=e471]:
+            - link "Privacy" [ref=e472] [cursor=pointer]:
+              - /url: /privacy
+            - link "Terms" [ref=e473] [cursor=pointer]:
+              - /url: /terms
+      - separator [ref=e474]
+      - generic [ref=e475]:
+        - generic [ref=e476]: © 2026 Vaultex — AI Trust Infrastructure
+        - generic [ref=e477]: GLBA · GDPR · SOC 2 · NIST AI RMF aligned

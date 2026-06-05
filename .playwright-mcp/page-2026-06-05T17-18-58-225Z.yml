@@ -1,0 +1,79 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - generic [ref=e8]: PII Gateway
+        - generic [ref=e9]: LIVE
+      - generic [ref=e11]:
+        - button "PII Tokenizer" [ref=e12] [cursor=pointer]
+        - button "? Guide" [ref=e13] [cursor=pointer]
+        - button "Settings" [ref=e14] [cursor=pointer]:
+          - img [ref=e15]
+          - text: Settings
+        - button "New Chat" [ref=e18] [cursor=pointer]:
+          - img [ref=e19]
+          - text: New Chat
+        - button "Reconfigure" [ref=e22] [cursor=pointer]:
+          - img [ref=e23]
+          - text: Reconfigure
+    - generic [ref=e26]:
+      - img [ref=e27]
+      - generic [ref=e32]: Persona
+      - generic [ref=e33]:
+        - button "Junior Analyst" [ref=e34] [cursor=pointer]
+        - button "Senior Analyst" [ref=e35] [cursor=pointer]
+        - button "VP Risk" [ref=e36] [cursor=pointer]
+        - button "Admin" [ref=e37] [cursor=pointer]
+      - generic [ref=e38]:
+        - generic [ref=e39]: "Viewing as:"
+        - generic [ref=e40]: Junior Analyst
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - img [ref=e46]
+            - generic [ref=e50]: Analyze a Dataset
+            - generic [ref=e51]: — upload a CSV and ask questions about your data with PII protected
+          - generic [ref=e52]:
+            - generic [ref=e53] [cursor=pointer]:
+              - img [ref=e54]
+              - generic [ref=e57]: Drop CSV here or click to upload
+              - img [ref=e58]
+            - generic [ref=e61]: or
+            - button "↓ Try Sample CSV 25 rows · 24 cols" [ref=e62] [cursor=pointer]:
+              - generic [ref=e63]: ↓
+              - text: Try Sample CSV
+              - generic [ref=e64]: 25 rows · 24 cols
+        - generic [ref=e65]:
+          - generic [ref=e67]:
+            - generic [ref=e68]:
+              - generic [ref=e69]: ✦ PII Gateway Active
+              - paragraph [ref=e70]: Send any message containing names, SSNs, account numbers, or loan IDs — then watch the tokenization happen in real time.
+            - generic [ref=e71]:
+              - generic [ref=e72]: Try one of these →
+              - button "→ Summarize the loan history for John Doe, SSN 123-45-6789, balance $5,000" [ref=e73] [cursor=pointer]:
+                - generic [ref=e74]: →
+                - text: Summarize the loan history for John Doe, SSN 123-45-6789, balance $5,000
+              - button "→ Customer Jane Smith, account number 987654321, owes $12,500 on loan LOAN-ABC123" [ref=e75] [cursor=pointer]:
+                - generic [ref=e76]: →
+                - text: Customer Jane Smith, account number 987654321, owes $12,500 on loan LOAN-ABC123
+              - button "→ Flag account routing number 021000021 for review, balance $230,000" [ref=e77] [cursor=pointer]:
+                - generic [ref=e78]: →
+                - text: Flag account routing number 021000021 for review, balance $230,000
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - textbox "Type a message with customer data (e.g. John Doe, SSN 123-45-6789)…" [ref=e82]
+              - button [disabled] [ref=e83]:
+                - img [ref=e84]
+            - paragraph [ref=e87]: Shift+Enter for new line · Click any message to inspect tokenization
+      - generic [ref=e89]:
+        - img [ref=e91]
+        - paragraph [ref=e94]: Click any message to inspect how PII was tokenized
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - img [ref=e98]
+          - generic [ref=e100]: Activity Log
+        - paragraph [ref=e102]: › waiting for activity...
+  - button "Open Next.js Dev Tools" [ref=e108] [cursor=pointer]:
+    - img [ref=e109]
