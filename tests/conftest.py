@@ -13,6 +13,9 @@ if project_root not in sys.path:
 os.environ.setdefault("JWT_SECRET", "test-secret-for-unit-tests")
 os.environ.setdefault("REDIS_URL", "redis://localhost:6379")
 os.environ.setdefault("ALLOWED_ORIGINS", "http://localhost:3000")
+# Hard-override security flags that the local .env may set differently for dev
+# convenience — tests must always run with the production-default posture.
+os.environ["ALLOW_INSECURE_TOKEN_ENDPOINT"] = "false"
 # Point the SQLite user DB at a writable temp path so importing gateway.database
 # / gateway.main never tries to create the container's /data dir on a dev host.
 os.environ.setdefault(
@@ -71,8 +74,35 @@ class FakeAsyncRedis:
             return lst[start:]
         return lst[start : end + 1]
 
+    def pipeline(self):
+        return FakePipeline(self)
+
     async def aclose(self):
         pass
+
+
+class FakePipeline:
+    """Buffered pipeline that replays commands on execute()."""
+
+    def __init__(self, redis: "FakeAsyncRedis"):
+        self._redis = redis
+        self._cmds: list = []
+
+    def rpush(self, key, value):
+        self._cmds.append(("rpush", key, value))
+        return self
+
+    def set(self, key, value):
+        self._cmds.append(("set", key, value))
+        return self
+
+    def expire(self, key, ttl):
+        self._cmds.append(("expire", key, ttl))
+        return self
+
+    async def execute(self):
+        for cmd, *args in self._cmds:
+            await getattr(self._redis, cmd)(*args)
 
 
 @pytest.fixture

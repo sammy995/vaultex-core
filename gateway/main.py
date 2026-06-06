@@ -1,3 +1,4 @@
+import re
 import time
 import uuid
 from contextlib import asynccontextmanager
@@ -207,6 +208,7 @@ async def get_models(provider: str, ollama_url: Optional[str] = "http://localhos
 
 
 @app.post("/api/auth/token", response_model=TokenResponse)
+@limiter.limit("10/minute")
 async def get_auth_token(body: TokenRequest, request: Request):
     """Issue a server-signed JWT for the requested role.
 
@@ -260,6 +262,7 @@ async def get_auth_token(body: TokenRequest, request: Request):
 
 
 @app.post("/api/users/register", response_model=UserResponse, status_code=201)
+@limiter.limit("5/minute")
 async def register(
     body: RegisterRequest,
     request: Request,
@@ -294,6 +297,7 @@ async def register(
 
 
 @app.post("/api/users/login", response_model=UserResponse)
+@limiter.limit("10/minute")
 async def login(
     body: LoginRequest,
     request: Request,
@@ -419,12 +423,14 @@ async def chat_completions(
     # 3. Tokenize all messages — FAIL SAFE: any error blocks the request
     tokenized_messages = []
     all_entities = []
+    all_tokens: dict[str, str] = {}
     try:
         for msg in body.messages:
             tok_text, entities, new_tokens = await run_tokenize(
                 msg.content, x_session_id, store
             )
             await store.update_token_map(x_session_id, new_tokens)
+            all_tokens.update(new_tokens)
             tokenized_messages.append({"role": msg.role, "content": tok_text})
             all_entities.extend([e.to_dict() for e in entities])
     except Exception as exc:
@@ -466,6 +472,7 @@ async def chat_completions(
         raise HTTPException(502, f"LLM provider error: {exc}")
 
     # 5. De-tokenize response according to caller's role
+    raw_llm_response = llm_response
     token_map = await store.get_token_map(x_session_id)
     detokenized = run_detokenize(llm_response, token_map, allowed_entities)
 
@@ -503,12 +510,22 @@ async def chat_completions(
                     "finish_reason": "stop",
                 }
             ],
-            # Extra field consumed by the UI — ignored by standard OpenAI clients
+            # Extra field consumed by the UI — ignored by standard OpenAI clients.
+            # token_vault is filtered by the caller's allowed_entities so that
+            # lower-privileged roles cannot reconstruct PII they are not permitted
+            # to see by reading the raw vault from the HTTP response.
             "_meta": {
                 "tokenized_messages": tokenized_messages,
                 "entities_found": all_entities,
                 "role": role,
                 "entities_allowed": list(allowed_entities),
+                "raw_llm_response": raw_llm_response,
+                "token_vault": {
+                    tok: val
+                    for tok, val in all_tokens.items()
+                    if (m := re.match(r"^\{\{([A-Z_]+)_\d+\}\}$", tok))
+                    and m.group(1) in allowed_entities
+                },
             },
         }
     )

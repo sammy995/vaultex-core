@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import hashlib
 from dataclasses import dataclass, field
 from typing import List, Tuple, Dict
@@ -158,11 +159,19 @@ async def run_tokenize(
     """
     analyzer = get_analyzer()
 
-    results = analyzer.analyze(
-        text=text,
-        language="en",
-        entities=ALL_ENTITIES,
-        score_threshold=0.4,
+    # DB7: Presidio + spaCy NER is CPU-bound work. Running it synchronously inside
+    # an async handler blocks the event loop for the full NER duration, serialising
+    # every concurrent request behind spaCy. run_in_executor offloads to the default
+    # ThreadPoolExecutor so the loop remains free for I/O while NER runs.
+    loop = asyncio.get_event_loop()
+    results = await loop.run_in_executor(
+        None,
+        lambda: analyzer.analyze(
+            text=text,
+            language="en",
+            entities=ALL_ENTITIES,
+            score_threshold=0.4,
+        ),
     )
 
     # Sort descending by start so right-to-left replacement keeps offsets valid

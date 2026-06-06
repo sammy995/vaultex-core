@@ -3,6 +3,12 @@
 .env.local
 *.log
 
+# Claude AI / session artefacts — not source code
+.claude/
+.playwright-mcp/
+detailedfeedback.txt
+docs/superpowers/
+
 # nested repos — managed independently
 ui/
 vaultex-core/

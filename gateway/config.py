@@ -49,6 +49,13 @@ class Settings(BaseSettings):
     encryption_secret: str = ""
     encryption_previous_secrets: str = ""
 
+    # DB5: dedicated HMAC key for the hash-chained audit log.  MUST be separate
+    # from JWT_SECRET so rotating one does not silently break the other's chain.
+    # Empty falls back to JWT_SECRET for back-compat.
+    # ⛔ Halt-point: in production source this from a KMS/HSM-backed secret and
+    # never rotate it in place without re-signing the stored chain.
+    audit_hmac_key: str = ""
+
     # Shared Governance Service (AgentGuard) — Vaultex ships audit + evidence
     # to the cross-cutting trust fabric. See MANIFESTO.md §0/§7. When the URL or
     # API key is unset, the client no-ops so Vaultex still runs standalone.
