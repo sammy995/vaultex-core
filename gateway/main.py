@@ -17,7 +17,7 @@ from gateway.audit import AuditLogger, EventType
 from gateway.auth import issue_token, validate_token
 from gateway.config import assert_secure_secret, settings
 from gateway.database import get_db, init_db
-from gateway.detokenizer import run_detokenize
+from gateway.detokenizer import _SHORT_TO_ENTITY, run_detokenize
 from gateway.llm_router import list_ollama_models, route_to_llm
 from gateway.models import (
     ChatCompletionRequest,
@@ -197,7 +197,15 @@ async def configure_session(
 
 
 @app.get("/api/session/models")
-async def get_models(provider: str, ollama_url: Optional[str] = "http://localhost:11434"):
+async def get_models(
+    provider: str,
+    ollama_url: Optional[str] = "http://localhost:11434",
+    auth: dict = Depends(_require_auth),
+):
+    # Auth required: this endpoint fetches a caller-supplied URL server-side, so
+    # leaving it open is an unauthenticated SSRF (internal port scan / metadata
+    # endpoint probe via the error message). Authentication scopes the blast
+    # radius to known users; self-hosters still reach their own LAN Ollama.
     if provider != "ollama":
         raise HTTPException(400, "Model listing is only supported for the ollama provider.")
     try:
@@ -270,6 +278,22 @@ async def register(
 ):
     """Create a new user account and return a ready-to-use JWT."""
     correlation_id = _correlation_id(request)
+    # Self-service registration may NEVER mint a privileged role. Without this an
+    # anonymous caller could register as admin/vp_risk and receive a JWT that
+    # detokenizes all PII and reads the audit log (privilege escalation).
+    # Privileged roles require an authenticated grant (SSO / admin provisioning).
+    if body.role in PRIVILEGED_ROLES:
+        await audit_log.log_event(
+            EventType.AUTH_FAILURE,
+            correlation_id=correlation_id,
+            role=body.role,
+            details={"reason": "privileged_role_via_self_registration"},
+        )
+        raise HTTPException(
+            403,
+            f"Role '{body.role}' cannot be self-registered; it requires an "
+            "authenticated grant.",
+        )
     if get_user_by_email(db, body.email):
         raise HTTPException(409, "Email already registered")
     if get_user_by_username(db, body.username):
@@ -520,11 +544,16 @@ async def chat_completions(
                 "role": role,
                 "entities_allowed": list(allowed_entities),
                 "raw_llm_response": raw_llm_response,
+                # Map the token's short code (e.g. ACCT) to its canonical entity
+                # type (ACCOUNT_NUMBER) before the permission check, so the vault
+                # exposes exactly what the role's detokenized text already shows —
+                # no more (avoids leaking disallowed PII) and no less (avoids a
+                # silently empty vault from a short-vs-entity-name mismatch).
                 "token_vault": {
                     tok: val
                     for tok, val in all_tokens.items()
-                    if (m := re.match(r"^\{\{([A-Z_]+)_\d+\}\}$", tok))
-                    and m.group(1) in allowed_entities
+                    if (m := re.match(r"^\{\{([A-Z]+)_\d+\}\}$", tok))
+                    and _SHORT_TO_ENTITY.get(m.group(1), m.group(1)) in allowed_entities
                 },
             },
         }

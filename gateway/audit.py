@@ -117,6 +117,20 @@ class AuditLogger:
         """Redis key that stores the hash of the most-recently appended entry."""
         return f"{day_key}:chain_head"
 
+    def _seq_key(self, day_key: str) -> str:
+        """Monotonic per-day append counter. Never decremented, so it survives
+        (and thus exposes) deletion of entries from the list."""
+        return f"{day_key}:seq"
+
+    def _watermark_key(self, day_key: str) -> str:
+        """Signed high-water mark: ``"{seq}:{HMAC(seq:last_entry_hash)}"``.
+
+        Because the mark is HMAC'd with the audit key, an attacker who deletes
+        trailing entries cannot forge a mark matching the shortened chain. This
+        closes the tail-truncation gap that prev/entry-hash chaining alone leaves
+        open (a shorter chain is internally consistent)."""
+        return f"{day_key}:watermark"
+
     async def _get_prev_hash(self, day_key: str) -> str:
         """Return the hash of the last written entry, or the genesis sentinel."""
         stored = await self.redis.get(self._chain_cursor_key(day_key))
@@ -159,15 +173,23 @@ class AuditLogger:
         entry_hash = _entry_hmac(_canonical(body))
         entry = {**body, "entry_hash": entry_hash}
 
+        # Advance the monotonic append counter and sign a high-water mark over
+        # (count, last_hash). Detached from the list so truncating the list does
+        # not roll it back; HMAC means it cannot be forged for a shorter chain.
+        seq = await self.redis.incr(self._seq_key(day_key))
+        watermark = f"{seq}:{_entry_hmac(f'{seq}:{entry_hash}')}"
+
         raw = json.dumps(entry)
         pipe = self.redis.pipeline()
         pipe.rpush(day_key, raw)
+        # Advance the chain cursor + watermark — same TTL as the list.
+        pipe.set(self._chain_cursor_key(day_key), entry_hash)
+        pipe.set(self._watermark_key(day_key), watermark)
         if self.ttl:
             pipe.expire(day_key, self.ttl)
-        # Advance the chain cursor — must be the same TTL as the list.
-        pipe.set(self._chain_cursor_key(day_key), entry_hash)
-        if self.ttl:
             pipe.expire(self._chain_cursor_key(day_key), self.ttl)
+            pipe.expire(self._watermark_key(day_key), self.ttl)
+            pipe.expire(self._seq_key(day_key), self.ttl)
         await pipe.execute()
 
         # ⛔ Halt-point: call _persist_to_worm(entry) here once S3 Object Lock
@@ -247,5 +269,33 @@ class AuditLogger:
                 }
 
             prev = stored_entry_hash
+
+        # Tail-truncation / append-count check against the signed watermark.
+        # `prev` now holds the hash of the last surviving entry (or the genesis
+        # sentinel for an empty list). A watermark is present for any chain
+        # written after this guard shipped; older chains skip it (backward compat).
+        raw_mark = await self.redis.get(self._watermark_key(key))
+        if raw_mark:
+            try:
+                seq_str, mark = raw_mark.split(":", 1)
+                expected_seq = int(seq_str)
+            except (ValueError, AttributeError):
+                return {
+                    "ok": False,
+                    "entries": len(parsed),
+                    "first_bad": len(parsed),
+                    "error": "audit watermark is malformed",
+                }
+            expected_mark = _entry_hmac(f"{expected_seq}:{prev}")
+            if expected_seq != len(parsed) or mark != expected_mark:
+                return {
+                    "ok": False,
+                    "entries": len(parsed),
+                    "first_bad": len(parsed),
+                    "error": (
+                        f"watermark mismatch: chain has {len(parsed)} entries but "
+                        f"{expected_seq} were appended — entries were truncated or removed"
+                    ),
+                }
 
         return {"ok": True, "entries": len(parsed), "first_bad": -1, "error": None}
